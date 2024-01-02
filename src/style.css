@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/* @font-face {
+    font-family: 'Chillax';
+    src: url('./fonts/Chillax-Variable.woff2') format('woff2'),
+         url('./fonts/Chillax-Variable.woff') format('woff'),
+         url('./fonts/Chillax-Variable.ttf') format('truetype');
+         font-weight: 200 700;
+         font-display: swap;
+         font-style: normal;
+  } */
+
+
+@font-face
+{
+    font-family: 'Chillax';
+    src: url('./fonts/Chillax-Extralight.woff2') format('woff2'),
+        url('./fonts/Chillax-Extralight.woff') format('woff'),
+        url('./fonts/Chillax-Extralight.ttf') format('truetype');
+    font-weight: 200;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face
+{
+    font-family: 'Chillax';
+    src: url('./fonts/Chillax-Light.woff2') format('woff2'),
+        url('./fonts/Chillax-Light.woff') format('woff'),
+        url('./fonts/Chillax-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face
+{
+    font-family: 'Chillax';
+    src: url('./fonts/Chillax-Regular.woff2') format('woff2'),
+        url('./fonts/Chillax-Regular.woff') format('woff'),
+        url('./fonts/Chillax-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face
+{
+    font-family: 'Chillax';
+    src: url('./fonts/Chillax-Medium.woff2') format('woff2'),
+        url('./fonts/Chillax-Medium.woff') format('woff'),
+        url('./fonts/Chillax-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face
+{
+    font-family: 'Chillax';
+    src: url('./fonts/Chillax-Semibold.woff2') format('woff2'),
+        url('./fonts/Chillax-Semibold.woff') format('woff'),
+        url('./fonts/Chillax-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+@font-face
+{
+    font-family: 'Chillax';
+    src: url('./fonts/Chillax-Bold.woff2') format('woff2'),
+        url('./fonts/Chillax-Bold.woff') format('woff'),
+        url('./fonts/Chillax-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+}
+
+
+*,
+*::before,
+*::after
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html
+{}
+
+body
+{
+    min-height: 100vh;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1.3;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Chillax';
+    overflow: hidden;
+}
+
+.wrapper
+{
+    /* give width below according to the number of sections you have in html */
+    width: 400%;
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-self: flex-start;
+    align-items: flex-start;
+    /* gap: 20px; */
+}
+
+.logo
+{
+    font-size: 8rem;
+    position: fixed;
+    z-index: 10;
+    top: 15%;
+    left: 4rem;
+    line-height: 0.9;
+}
+
+.bands
+{
+    height: 100vh;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    /* width = (width of one band) * (total number of bands) */
+    /* width: 300px; */
+    z-index: 20;
+    will-change: transform;
+    text-align: left;
+    gap: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.band
+{
+
+    display: flex;
+    height: 100vh;
+    width: 100px;
+    background: chocolate;
+    box-shadow: inset -1px 0 0 10px coral;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    transform: translateX(0);
+
+}
+
+.line
+{
+    background: #f81515;
+    height: 1rem;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+}
+
+section
+{
+    /* padding: 0 300px; */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+section.intro
+{
+    width: calc(100vw - 300px);
+}
+
+section:not(.intro)
+{
+    min-width: 100vw;
+}
+
+section.about
+{
+    background: #875dca;
+}
+
+section.work
+{
+    background: #c35dca;
+}
+
+section.contact
+{
+    background: #ca5d73;
+}
+
+.slider-wrapper
+{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    flex-wrap: nowrap;
+    padding: 0 50px 0 150px;
+}
+
+.slider-wrapper .slide
+{
+    width: 400px;
+    height: 250px;
+    border-radius: 16px;
+    flex-shrink: 0;
+}
+
+.slider-wrapper .slide:not(:last-child)
+{
+    margin-right: 16px;
+}
+
+section.about .slider-wrapper .slide
+{
+    background: #c35dca;
+    box-shadow: inset -1px 0 0 10px #c47cc9;
+}
+
+section.work .slider-wrapper .slide
+{
+    background: #ca5d73;
+    box-shadow: inset -1px 0 0 10px #c65169;
+}
+
+section.contact .slider-wrapper .slide
+{
+    background: #875dca;
+    box-shadow: inset -1px 0 0 10px #9275c2;
+}
+
+
+
+
+
+
+
+
+
+
+/* 
+div.bar{
+    width: 108px;
+    height: 100%;
+    position: relative;
+    margin-right: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    background: #ccc;
+    border-left: 1px solid #f52b2b;
+    border-right: 1px solid #f52b2b;
+}
+.block{
+    width: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    transform: translateX(-100%);
+}
+
+.about div.bar, .about .block{
+    background: #ffc107;
+
+}
+.work div.bar, .work .block{
+    background: #a2f08e;
+}
+.contact div.bar, .contact .block{
+    background: #83cdc1;
+}
+
+.caption{
+    position: absolute;
+    left: calc(4rem + 108px);
+    bottom: 4rem;
+    width: 30%;
+    font-weight: 400;
+    color: #444;
+    font-family: monospace;
+    transform: translate(100%, 100%);
+}
+.section img {
+    position: absolute;
+    z-index: 10;
+    height: 90vh;
+    width: auto;
+    margin-inline: auto;
+    transform: translateY(-100%);
+}
+.huge-text{
+    font-size: 25rem;
+    width: 100%;
+    text-align: center;
+    color: #f52b2b;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    transform: translateY(100%);
+    font-weight: 700;
+}
+
+.nickname{
+    position: absolute;
+    top: 4rem;
+    right: 4rem;
+    font-size: 3rem;
+    text-align: right;
+    transform: translateY(-200%);
+}
+.nickname span{
+    display: block;
+    font-size: 70%;
+    color:#f52b2b ;
+}
+
+.quote {
+    position: absolute;
+    bottom: 4rem;
+    right: 4rem;
+    font-size: 3rem;
+    width: 30%;
+    text-align: right;
+    transform: translateY(200%);
+}
+
+.quote::before, .quote::after {
+    content: '';
+    color: #ccc;
+} */
