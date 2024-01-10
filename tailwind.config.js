@@ -20,6 +20,7 @@ module.exports = {
         white: '#FFFFFF',
         gray: '#999999',
         black: {
+          0: '#000000',
           9: '#161616',
           12: '#1F1F1F',
           20: '#333333',
@@ -33,9 +34,13 @@ module.exports = {
       borderRadius: {
         100: '100px',
       },
+      gap: {
+        100: '100px',
+      },
       padding: {
-        '60': '60px',
-        '100': '100px',
+        60: '60px',
+        100: '100px',
+        150: '150px',
       },
       fontFamily: {
         'chill': ['Chillax'],
@@ -43,10 +48,10 @@ module.exports = {
       },
       fontSize: {
         '2.5xl': '28px',
-        '3.2xl': '32px',
-        '3.5xl': '34px',
-        '5.5xl': '50px',
-        '10xl': ['198px', { lineHeight: '200px' }]
+        '3.2xl': '32px',  //32px clamp(28px, 32px, 1.667vw )
+        '3.5xl': '34px', //34px
+        '5.5xl': 'clamp(32px, 50px, 2.60vw)', //50px
+        '10xl': 'clamp(98px,198px,10.313vw)' //198px
       },
 
       width: {
@@ -67,6 +72,9 @@ module.exports = {
           '0%, 100%': { transform: 'translateX(100%) translateY(-50%)' },
           '50%': { transform: 'translateX(0) translateY(-50%)' }
         }
+      },
+      transition: {
+        'img-reveal': 'transform 2s cubic-bezier(.19,1,.22,1)',
       }
     },
   },

@@ -1,94 +1,290 @@
+
+// assuming the bands are 100px width
+
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
-document.addEventListener('DOMContentLoaded', () => {
 
-    $('#introSection').css('width', `${window.innerWidth - $('.bands').width()}px`)
+function fitFirstLastSections() {
+    // controlling landing section's width to extactly match the available space on the screen excluding the space that bands are taking up.
+    const landingSection = document.querySelector(".intro-section");
+    landingSection.style.width = (window.innerWidth - document.querySelector('.bands').offsetWidth) + 'px';
+    const contactSection = document.querySelector(".contact-section");
+    contactSection.style.width = (window.innerWidth - document.querySelector('.bands').offsetWidth) + 'px';
+}
+fitFirstLastSections();
 
-    const sections = gsap.utils.toArray('section');
-    const wrapper = document.querySelector(".wrapper");
-    let wrapperWidth = 0;
-    sections.forEach(sec => {
-        wrapperWidth += $(sec).width();
+
+const slider = document.querySelector("#panels");
+const sliderWrapper = document.querySelector("#sliderWrapper");
+
+const sections = gsap.utils.toArray(".section");
+sections.forEach((section) => {
+    $(section).css('min-width', (window.innerWidth - $('.bands').width()) + 'px');
+});
+
+
+function distance() {
+    return sliderWrapper.scrollWidth - window.innerWidth
+}
+window.addEventListener("resize", () => {
+    fitFirstLastSections();
+    distance();
+    ScrollTrigger.refresh();
+});
+
+let scrollTween = gsap.to(sliderWrapper, {
+    x: window.innerWidth,
+    xPercent: -100,
+    ease: "none", // <-- IMPORTANT!
+    scrollTrigger: {
+        trigger: "#sliderWrapper",
+        pin: true,
+        scrub: 1,
+        // markers: true,
+        end: `+=${distance()}`,
+        invalidateOnRefresh: true,
+    }
+});
+
+
+// ============ Bands translation start ============
+const totalBands = document.querySelectorAll('.band');
+totalBands.forEach((band, index) => {
+    gsap.to(band, {
+        x: () => -1 * window.innerWidth,
+        xPercent: totalBands.length * band.offsetWidth,
+        ease: "none",
+        scrollTrigger: {
+            trigger: `#sec-${index}`,
+            containerAnimation: scrollTween,
+            start: `right right-=${(totalBands.length - index) * band.offsetWidth}px`,
+            end: `right left+=${index * band.offsetWidth}px`,
+            // markers: true,
+            toggleActions: "play none none reset",
+            scrub: true,
+            id: "1",
+            invalidateOnRefresh: true,
+        }
     })
-    // console.log(wrapperWidth);
+})
+// ============ Bands translation end ============
 
-    let scrollTween = gsap.to(sections, {
-        // xPercent: -100 * (sections.length - 1),
-        x: `-${wrapperWidth - window.innerWidth}px`,
+
+// ============ About title translate start ============
+gsap.from('#sec-1 #aboutTitle', {
+    xPercent: -13,
+    ease: 'none',
+    scrollTrigger: {
+        trigger: '#sec-1',
+        containerAnimation: scrollTween,
+        start: 'left left',
+        end: '+=300',
+        scrub: 1,
+        // markers: true
+    }
+})
+// ============ About title translate end ============
+
+
+
+
+// ============ Sticky header start ============
+// setTimeout(() => {
+//     $('#sec-1 .header').parent().css('width', window.innerWidth - 300 + 'px')
+//     const sec1 = document.querySelector('#sec-1').offsetWidth;
+//     console.log(sec1);
+//     gsap.to('#sec-1 .header', {
+//         translateX: `${(sec1 - $('#sec-1 .header').width()) - 160}px`,
+//         ease: 'none',
+//         scrollTrigger: {
+//             trigger: '#sec-1 .header',
+//             containerAnimation: scrollTween,
+//             start: 'left left+=100',
+//             endTrigger: '#sec-1',
+//             end: 'right right-=200',
+//             scrub: true,
+//             markers: true
+//         }
+//     })
+
+// }, 100);
+
+
+const headerWrapper = document.querySelectorAll('.header-wrapper');
+const bandWidth = document.querySelector('.band').offsetWidth;
+setTimeout(() => {
+    headerWrapper.forEach((headerWrapper, index) => {
+        let header = headerWrapper.querySelector('.header');
+        headerWrapper.style.width = window.innerWidth - (totalBands.length * bandWidth) + 'px';
+        let parentSection = headerWrapper.parentElement;
+
+        gsap.to(header, {
+            translateX: `${(parentSection.offsetWidth - header.offsetWidth)}px`,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: header,
+                containerAnimation: scrollTween,
+                start: `left left+=${(index + 1) * bandWidth}`,
+                endTrigger: parentSection,
+                end: `right right-=${(totalBands.length - (index + 1)) * bandWidth}`,
+                scrub: true,
+                // markers: true
+            }
+        })
+    })
+}, 100);
+// ============ Sticky header end ============
+
+
+
+
+
+
+
+// Calculate the cumulative width of previous sections
+const cumulativeWidths = [];
+let cumulativeWidth = 0;
+sections.forEach((section, index) => {
+    cumulativeWidth += section.scrollWidth;
+    cumulativeWidths.push(cumulativeWidth);
+});
+
+
+// Add click event on anchor tags with class "band"
+const bandLinks = document.querySelectorAll('a.band');
+bandLinks.forEach((link, index) => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Calculate the left position based on cumulative widths
+        const leftPosition = index >= 0 ? cumulativeWidths[index] : 0;
+
+        console.log(`Left position of section ${link.id}: ${leftPosition}px`);
+
+
+
+        gsap.to(window, {
+            duration: 1,
+            scrollTo: {
+                y: leftPosition,
+            }
+        });
+    });
+});
+
+
+
+
+// ======== Showcase images reveal animation start ========
+const showcaseImages = document.querySelectorAll('.showcase-img');
+showcaseImages.forEach((image, index) => {
+
+    gsap.from(image, {
+        clipPath: 'inset(22% 20% 22% 20%)',
+        duration: 1, ease: 'power4.inOut',
+        scrollTrigger: {
+            trigger: image.parentElement,
+            start: `left right-=${(totalBands.length + 1) - image.offsetParent.dataset.section.replace('band-', '')}00px`,
+
+            containerAnimation: scrollTween,
+            toggleActions: 'play none none reverse',
+            // markers: true,
+            onEnter: () => {
+                gsap.to(image.querySelector('img'), {
+                    scale: 1,
+                    duration: 1,
+                    ease: 'power4.inOut',
+                })
+            }, onLeaveBack: () => {
+                gsap.to(image.querySelector('img'), {
+                    scale: 1.5,
+                    duration: 1,
+                    ease: 'power4.inOut',
+                })
+            }
+        }
+    })
+})
+// ======== Showcase images reveal animation end ========
+
+
+// ======== Showcase Navbar animation start ========
+setTimeout(() => {
+    const showcaseNav = document.querySelector('#showcase-nav');
+    const showcaseHeader = showcaseNav.offsetParent.querySelector('.header');
+    gsap.to(showcaseNav.firstElementChild, {
+        translateX: `${showcaseNav.offsetParent.offsetWidth - (showcaseHeader.offsetWidth)}px`,
         ease: 'none',
         scrollTrigger: {
-            trigger: '.wrapper',
-            pin: true,
-            scrub: 1,
-            // snap: 1 / (sections.length - 1),
-            start: 'top top',
-            endTrigger: $('.wrapper').width(),
+            containerAnimation: scrollTween,
+            trigger: showcaseNav,
+            start: `left left+=${showcaseNav.offsetParent.id.replace('sec-', '') * bandWidth}`,
+            end: `right right-=${(totalBands.length - showcaseNav.offsetParent.id.replace('sec-', '')) * bandWidth}`,
+            scrub: true,
             // markers: true,
-            end: () => "+=" + (wrapper.offsetWidth - innerWidth)
         }
     })
 
-    // setting width of parent of bands
-    $('.bands').css('width', `${$('.band').length * $('.band').width()}px`)
 
-    const bands = gsap.utils.toArray('.band');
-    let offset = 0;
-    let reversedOffset = $('.band').length * $('.band').width();
-    let bandTriggers = [];
-    bands.forEach(band => {
-        bandTriggers.push(gsap.to(band, {
-            ease: 'linear',
-            xPercent: -(band.getBoundingClientRect().left - offset),
-            scrollTrigger: {
-                containerAnimation: scrollTween,
-                trigger: $(`.section[data-section='${band.id}']`),
-                // trigger: band,
-                scrub: true,
-                start: `bottom bottom-=${reversedOffset + 16}`,
-                endTrigger: $(`.section[data-section='${band.id}']`),
-                // endTrigger: band,
-                end: `bottom top+=${offset}`,
-                // end: 3000,
-                // markers: true
-            }
-        }))
-        offset += $('.band').width();
-        reversedOffset -= $('.band').width();
-    })
+    const showcaseNavLinks = gsap.utils.toArray("#showcase-nav a");
+    const showcasePanels = gsap.utils.toArray("#showcase-panels > div");
+    const cumulativeShowcasePanelWidths = [];
+    let cumulativeShowcasePanelWidth = 0;
 
-
-    $(window).on('scroll', () => {
-        // console.log(`scrollTop: ${$(window).scrollTop()}`);
-    })
-
-    $('.band').on('click', function (e) {
-        // band click logic goes 
-        scrollTween.scrollTrigger.start = 0;
-        e.preventDefault();
-        let targetElem = document.querySelector($(this).data('section')),
-            y = targetElem;
-
-        let totalScroll = scrollTween.scrollTrigger.end - scrollTween.scrollTrigger.start;
-
-        // let totalMovement = (sections.length - 1) * targetElem.offsetWidth;
-        let totalMovement = wrapperWidth - window.innerWidth;
-
-        y = (Math.round(scrollTween.scrollTrigger.start + ((bandTriggers[$(this).index()].scrollTrigger.markerEnd.offsetLeft - ($(this).index() * $(this).width())) / totalMovement) * totalScroll));
+    showcasePanels.forEach((panel, i) => {
+        cumulativeShowcasePanelWidth += panel.scrollWidth;
+        cumulativeShowcasePanelWidths.push(cumulativeShowcasePanelWidth);
 
 
 
-        console.log(bandTriggers[$(this).index()].scrollTrigger.markerStart.offsetLeft);
-        console.log(y);
-        gsap.to(window, {
-            ease: 'linear',
-            scrollTo: {
-                y: y,
-                autoKill: false
+        ScrollTrigger.create({
+            containerAnimation: scrollTween,
+            trigger: panel,
+            star: `right center`,
+            endTrigger: showcasePanels[i + 1],
+            end: `left center`,
+            // markers: true,
+            onLeave: () => {
+                if (showcaseNavLinks[i + 1]) {
+                    showcaseNavLinks[i + 1].classList.add('showcase-nav__active');
+                    showcaseNavLinks[i].classList.remove('showcase-nav__active');
+                }
             },
-        });
+            onEnterBack: () => {
+                showcaseNavLinks[i].classList.add('showcase-nav__active');
+                if (showcaseNavLinks[i + 1]) {
+                    showcaseNavLinks[i + 1].classList.remove('showcase-nav__active');
+
+                }
+            },
+
+        })
     })
 
 
+    // showcaseNavLinks.forEach((link, i) => {
+    //     console.log();
+    //     link.addEventListener("click", e => {
+    //         e.preventDefault();
+    //         console.log(cumulativeShowcasePanelWidths[i]);
+    //         const leftPosition = i >= 0 ? cumulativeShowcasePanelWidths[i] : 0;
+
+    //         gsap.to(window, {
+    //             duration: 1,
+    //             scrollTo: {
+    //                 y: showcasePanels[i].getBoundingClientRect().left,
+    //                 // offsetY: 
+    //             }
+    //         });
+    //     });
+    // });
+
+
+
+
+}, 100);
+
+// ======== Showcase Navbar animation end ========
 
 
 
@@ -96,7 +292,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-})
-
+// $(window).bind('resize', function (e) {
+//     if (window.RT) clearTimeout(window.RT);
+//     window.RT = setTimeout(function () {
+//         this.location.reload(); /* false to get page from cache */
+//     }, 100);
+// });
 
 
