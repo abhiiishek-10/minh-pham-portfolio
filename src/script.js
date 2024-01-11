@@ -8,6 +8,9 @@ function fitFirstLastSections() {
     // controlling landing section's width to extactly match the available space on the screen excluding the space that bands are taking up.
     const landingSection = document.querySelector(".intro-section");
     landingSection.style.width = (window.innerWidth - document.querySelector('.bands').offsetWidth) + 'px';
+    landingSection.querySelector('.intro-main').style.height = (window.innerHeight - landingSection.querySelector('header').offsetHeight) + 'px';
+
+
     const contactSection = document.querySelector(".contact-section");
     contactSection.style.width = (window.innerWidth - document.querySelector('.bands').offsetWidth) + 'px';
 }
@@ -178,13 +181,13 @@ bandLinks.forEach((link, index) => {
 // ======== Showcase images reveal animation start ========
 const showcaseImages = document.querySelectorAll('.showcase-img');
 showcaseImages.forEach((image, index) => {
-
     gsap.from(image, {
         clipPath: 'inset(22% 20% 22% 20%)',
         duration: 1, ease: 'power4.inOut',
         scrollTrigger: {
             trigger: image.parentElement,
-            start: `left right-=${(totalBands.length + 1) - image.offsetParent.dataset.section.replace('band-', '')}00px`,
+            // start: `left right-=100px`,
+            start: `left right-=${(totalBands.length + 1) - image.offsetParent.offsetParent.dataset.section.replace('band-', '')}00px`,
 
             containerAnimation: scrollTween,
             toggleActions: 'play none none reverse',
@@ -226,8 +229,8 @@ setTimeout(() => {
     })
 
 
-    const showcaseNavLinks = gsap.utils.toArray("#showcase-nav a");
-    const showcasePanels = gsap.utils.toArray("#showcase-panels > div");
+    const showcaseNavLinks = gsap.utils.toArray("#showcase-nav a.showcase-nav-link");
+    const showcasePanels = gsap.utils.toArray("#showcase-panels > div.slide-group");
     const cumulativeShowcasePanelWidths = [];
     let cumulativeShowcasePanelWidth = 0;
 
@@ -287,16 +290,57 @@ setTimeout(() => {
 // ======== Showcase Navbar animation end ========
 
 
+const headings = document.querySelectorAll('.heading-1');
+headings.forEach(heading => {
+    const text = heading.textContent.trim(); // Trim leading and trailing whitespace
+    let isSpace = false; // Flag to track unnecessary spaces
+    heading.innerHTML = text
+        .split('')
+        .map((letter, index) => {
+            if (letter !== ' ') { // Skip empty spaces
+                const letterElement = document.createElement('div');
+                letterElement.classList.add('letter');
+                letterElement.style.setProperty('--delay', 0.2);
+                letterElement.style.setProperty('--index', index);
+                letterElement.textContent = letter;
+                isSpace = false; // Reset the flag when a non-space character is encountered
+                return letterElement.outerHTML;
+            } else if (!isSpace) { // Add space only if it's not an unnecessary space
+                isSpace = true; // Set the flag to true for unnecessary spaces
+                return ' ';
+            }
+            return '';
+        })
+        .join('');
+});
 
 
 
+gsap.utils.toArray('.heading-1').forEach(el => {
+    gsap.to(el, {
+
+        scrollTrigger: {
+            trigger: el,
+            toggleClass: 'char',
+            containerAnimation: scrollTween,
+            start: 'left 85%',
+            // end: 'right 50%',
+            // scrub: true,
+            // markers: true,
+            toggleActions: 'play none none none',
+        },
+        // stagger: 0.2
 
 
-// $(window).bind('resize', function (e) {
-//     if (window.RT) clearTimeout(window.RT);
-//     window.RT = setTimeout(function () {
-//         this.location.reload(); /* false to get page from cache */
-//     }, 100);
-// });
+    });
+});
+
+
+$(window).bind('resize', function (e) {
+    if (window.RT) clearTimeout(window.RT);
+    window.RT = setTimeout(function () {
+        this.location.reload(); /* false to get page from cache */
+    }, 100);
+});
 
 

@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="../dist/output.css">
+    <!-- <link rel="stylesheet" href="../dist/output.css"> -->
+    <link rel="stylesheet" href="./main.css">
+
 </head>
 
 <body class="min-h-100 ">
@@ -16,15 +18,15 @@
     <div class="bands ">
         <a id="band-1" data-section="#sec-1" class="band " id="band-1" data-section="#sec-1">
             <span class="band-content ">01</span>
-            <span class="band-content " style="writing-mode: sideways-lr;">About</span>
+            <span class="band-content bottom">About</span>
         </a>
         <a id="band-2" data-section="#sec-2" class="band " id="band-2" data-section="#sec-2">
             <span class="band-content ">02</span>
-            <span class="band-content " style="writing-mode: sideways-lr;">Work</span>
+            <span class="band-content bottom">Work</span>
         </a>
         <a id="band-3" data-section="#sec-3" class="band " id="band-3" data-section="#sec-3">
             <span class="band-content ">03</span>
-            <span class="band-content " style="writing-mode: sideways-lr;">Contact</span>
+            <span class="band-content bottom">Contact</span>
         </a>
     </div>
     <!-- ====== Bands End ====== -->
@@ -108,9 +110,12 @@
 
                         <!-- intro content start -->
                         <div class="intro-content">
-                            <h1 class="heading-1 intro-heading   ">
-                                Minh Pham
+                            <h1 class="heading-1 ">
+                                Minh
                             </h1>
+                            <h2 class="heading-1 intro-heading">
+                                Pham
+                            </h2>
                             <div class="intro-subheading">
                                 <p class="subtitle">
                                     Based in India. <br> I’m
@@ -270,8 +275,12 @@
                             Showcases
                         </h2>
                     </div>
+
                     <div class="showcase-slider flex" id="showcase-panels">
-                        <div id="portfolio" class="slide-group flex gap-8">
+                        <div id="portfolio" class="slide-group flex">
+                            <div class="slide-group-title">
+                                <h3 class="subtitle">Portfolio</h3>
+                            </div>
                             <div class=" showcase-slide">
                                 <div class=" showcase-img overflow-hidden">
                                     <img src="../assets/imgs/show-case-1.jpg" alt="show-case-img">
@@ -288,7 +297,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="dribbble" class="slide-group flex gap-8">
+                        <div id="dribbble" class="slide-group flex">
+                            <div class="slide-group-title">
+                                <h3 class="subtitle">Dribbble</h3>
+                            </div>
                             <div class=" showcase-slide">
                                 <div class=" showcase-img overflow-hidden">
                                     <img src="../assets/imgs/show-case-2.jpg" alt="show-case-img">
@@ -300,14 +312,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="behance" class="slide-group flex gap-8">
+                        <div id="behance" class="slide-group flex">
+                            <div class="slide-group-title">
+                                <h3 class="subtitle">Behance</h3>
+                            </div>
                             <div class=" showcase-slide">
                                 <div class=" showcase-img overflow-hidden">
                                     <img src="../assets/imgs/show-case-1.jpg" alt="show-case-img">
                                 </div>
                             </div>
                         </div>
-                        <div id="telegram" class="slide-group flex gap-8">
+                        <div id="telegram" class="slide-group flex">
+                            <div class="slide-group-title">
+                                <h3 class="subtitle">Telegram</h3>
+                            </div>
                             <div class=" showcase-slide">
                                 <div class=" showcase-img overflow-hidden">
                                     <img src="../assets/imgs/show-case-2.jpg" alt="show-case-img">
@@ -331,10 +349,10 @@
                 <!-- Showcases navbar fake Start -->
                 <div id="showcase-nav" class="showcase-nav-wrapper">
                     <div class="showcase-nav">
-                        <a href="#" class="showcase-nav-link p-reg showcase-nav__active ">Projects</a>
-                        <a href="#" class="showcase-nav-link p-reg ">Dribbble</a>
-                        <a href="#" class="showcase-nav-link p-reg ">Behance</a>
-                        <a href="#" class="showcase-nav-link p-reg ">Telegram</a>
+                        <a href="#" class="showcase-nav-link p-reg showcase-nav__active ">Projects</a><a href="#"
+                            class="showcase-nav-link p-reg ">Dribbble</a><a href="#"
+                            class="showcase-nav-link p-reg ">Behance</a><a href="#"
+                            class="showcase-nav-link p-reg ">Telegram</a>
                     </div>
                 </div>
                 <!-- Showcases navbar fake end -->
@@ -384,7 +402,8 @@
                             <div class="contact-heading ">
                                 <h2 class="heading-1">
                                     Let’s Work
-                                    <br>
+                                </h2>
+                                <h2 class="heading-1">
                                     Together
                                 </h2>
                             </div>
