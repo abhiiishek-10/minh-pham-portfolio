@@ -377,6 +377,10 @@ a
 /*=============================================
 =            Header            =
 =============================================*/
+.mobile-header
+{
+    display: none;
+}
 
 .header-wrapper
 {
@@ -785,7 +789,7 @@ header nav .nav-link
     /* max-height: 516px; */
     /* height: 100%; */
     object-fit: cover;
-    /* aspect-ratio: 16/9; */
+    aspect-ratio: 16/9;
     transform: scale(1.5);
 }
 
@@ -820,11 +824,44 @@ header nav .nav-link
     color: var(--white);
     text-transform: uppercase;
     transition-duration: 500ms;
+    position: relative;
+    z-index: 1;
+}
+
+.showcase-nav .showcase-nav-link span
+{
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+.showcase-nav .showcase-nav-link::before
+{
+    content: '';
+    position: absolute;
+    right: 0;
+    left: auto;
+    bottom: 0;
+    top: 0;
+    width: 0%;
+    height: 100%;
+    z-index: 0;
+    transform-origin: left;
+    transition-duration: 500ms;
+    background: var(--primary-dark);
+    border-radius: 60px;
+}
+
+.showcase-nav .showcase-nav-link.showcase-nav__active::before
+{
+    left: 0;
+    right: auto;
+    width: 100%;
 }
 
 .showcase-nav .showcase-nav-link.showcase-nav__active
 {
-    background: var(--primary-dark);
+    /* background: var(--primary-dark); */
     color: var(--black-0);
 }
 
@@ -872,10 +909,31 @@ header nav .nav-link
 .contact-msg a
 {
     display: block;
+    width: fit-content;
+    position: relative;
+}
+
+.contact-msg a::after
+{
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    right: 0;
+    width: 0%;
+    height: 2px;
+    transition-duration: 500ms;
+}
+
+.contact-msg a:hover::after
+{
+    width: 100%;
+    left: 0;
+    right: unset;
 }
 
 .contact-msg a:first-child
 {
+    margin-bottom: 5px;
     color: var(--primary-dark);
     font-weight: 400;
 }
@@ -884,6 +942,17 @@ header nav .nav-link
 {
     font-weight: 600;
     color: var(--borderColor);
+
+}
+
+.contact-msg a:first-child::after
+{
+    background: var(--primary-dark);
+}
+
+.contact-msg a:last-child::after
+{
+    background: var(--borderColor);
 
 }
 
@@ -950,3 +1019,344 @@ header nav .nav-link
 }
 
 /*=====  End of Contact section  ======*/
+
+
+
+
+.loader
+{
+    position: fixed;
+    inset: 0;
+    background: var(--primary-light);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+@media (max-width: 991px)
+{
+
+
+
+    /*=============================================
+    =            utils            =
+    =============================================*/
+
+    .section
+    {
+        height: auto;
+    }
+
+    .scroll-indicator
+    {
+        display: none;
+    }
+
+    /*=====  End of utils  ======*/
+
+
+
+
+
+    /*=============================================
+    =            typography            =
+    =============================================*/
+    .p-xl
+    {
+        font-size: clamp(18px, 28px, 1.458vw);
+        line-height: 1.5;
+    }
+
+    .p-md
+    {
+        font-size: max(14px, 1.5vw);
+    }
+
+    .p-reg
+    {
+        font-size: max(12px, 1.5vw);
+    }
+
+    /*=====  End of typography  ======*/
+
+
+
+    /*=============================================
+    =            Wrapper            =
+    =============================================*/
+
+    .wrapper
+    {
+        width: unset;
+        display: block;
+    }
+
+    /*=====  End of Wrapper  ======*/
+
+
+
+
+
+
+    /*=============================================
+    =            Bands            =
+    =============================================*/
+
+    .bands
+    {
+        display: none;
+    }
+
+    /*=====  End of Bands  ======*/
+
+
+
+    /*=============================================
+    =            header            =
+    =============================================*/
+    .mobile-header
+    {
+        display: block;
+        padding-block: min(25px, 4.123vh);
+        position: fixed;
+        z-index: 99;
+        width: 100%;
+    }
+
+    .header-wrapper
+    {
+        display: none;
+    }
+
+    .wrapper header
+    {
+        display: none;
+    }
+
+    /*=====  End of header  ======*/
+
+
+
+
+    /*=============================================
+    =            Intro main            =
+    =============================================*/
+
+    .intro-main
+    {
+        min-height: 50dvh;
+        display: block;
+    }
+
+    .intro-main .intro-img
+    {
+        width: 100%;
+        position: absolute;
+        right: 5%;
+        bottom: 15%;
+        width: 50%;
+        height: 50%;
+        background: var(--primary-dark);
+    }
+
+    .intro-main .intro-img img
+    {
+        transition-duration: unset;
+    }
+
+    .intro-img img:hover
+    {
+        transform: scale(1);
+        filter: grayscale(100%);
+        -webkit-filter: grayscale(100%);
+    }
+
+    .intro-main .intro-content-wrapper
+    {
+        width: unset;
+    }
+
+    .intro-content .heading-1
+    {
+        display: inline-block;
+    }
+
+    .intro-content .intro-desc
+    {
+        max-width: 50%;
+    }
+
+    .intro-content .intro-subheading
+    {
+        margin-top: 20px;
+    }
+
+    .intro-content .intro-heading::after
+    {
+        height: 10px;
+        width: 40%;
+        max-width: unset;
+        left: -90%;
+        bottom: -10px;
+    }
+
+    /*=====  End of Intro main  ======*/
+
+
+
+
+
+    /*=============================================
+    =            About section            =
+    =============================================*/
+
+    .about-section .about-main
+    {
+        flex-direction: column-reverse;
+        height: unset;
+    }
+
+    .about-content-wrapper
+    {
+        height: unset;
+    }
+
+    .about-content
+    {
+        padding-top: clamp(30px, 60px, 3.125vw);
+        padding-inline: clamp(30px, 60px, 3.125vw);
+    }
+
+    .skills-group
+    {
+        max-width: 80%;
+        margin-bottom: 8%;
+    }
+
+    .skills-group .single-skill
+    {
+        padding: 8px 22px;
+    }
+
+
+    .about-img
+    {
+        width: 100%;
+    }
+
+    /*=====  End of About section  ======*/
+
+
+
+    /*=============================================
+    =            Showcase            =
+    =============================================*/
+    .showcase-section
+    {
+        /* overflow: visible; */
+        display: block;
+        height: fit-content;
+    }
+
+    .showcase-main
+    {
+        padding-block: min(13.11vh, 6.25vw);
+        /* overflow: visible; */
+    }
+
+    .showcase-main
+    {
+        /* padding-top: 0; */
+        display: block;
+        position: relative;
+    }
+
+    .showcase-heading
+    {
+        margin-bottom: min(13.11vh, 6.25vw);
+    }
+
+    .showcase-slider
+    {
+        display: block;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .showcase-slider .slide-group
+    {
+        margin-bottom: 20px;
+        /* display: block; */
+        gap: 20px;
+        flex-shrink: 0;
+        position: relative;
+        width: max-content;
+    }
+
+    .showcase-slider .slide-group>.showcase-slide
+    {
+        /* display: block; */
+        position: relative;
+        flex-shrink: 0;
+        max-width: 300px;
+    }
+
+    .showcase-slider .slide-group .showcase-slide .showcase-img img
+    {
+        aspect-ratio: 1;
+    }
+
+    #showcase-nav
+    {
+        display: none;
+    }
+
+    /*=====  End of Showcase  ======*/
+
+
+
+
+
+    /*=============================================
+    =            Contact            =
+    =============================================*/
+
+    .contact-main
+    {
+        height: auto;
+        display: block;
+    }
+
+    .contact-content-left
+    {
+        width: 100%;
+    }
+
+    .contact-img
+    {
+        right: 5%;
+        bottom: -60%;
+        top: unset;
+    }
+
+    .connect-links
+    {
+        margin-top: min(7.01vh, 3.54vw);
+    }
+
+
+    /*=====  End of Contact  ======*/
+
+
+
+
+
+
+
+
+
+}
