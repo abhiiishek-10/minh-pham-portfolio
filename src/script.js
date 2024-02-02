@@ -1,5 +1,5 @@
-gsap.registerPlugin(Draggable, ScrollToPlugin, ScrollTrigger );
-window.onload =  function(){
+gsap.registerPlugin(Draggable, ScrollToPlugin, ScrollTrigger);
+window.onload = function () {
     gsap.to('.loader', {
         height: 0,
         duration: 1,
@@ -8,11 +8,50 @@ window.onload =  function(){
     })
 }
 
+function initiateLenis() {
+    const lenis = new Lenis()
+    lenis.on('scroll', ScrollTrigger.update)
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000)
+    })
+    gsap.ticker.lagSmoothing(0)
+}
+
+
+function chopHeadingsToLetters(element) {
+    // const headings = document.querySelectorAll('.heading-1');
+    const headings = element;
+    headings.forEach(heading => {
+        const text = heading.textContent.trim(); // Trim leading and trailing whitespace
+        let isSpace = false; // Flag to track unnecessary spaces
+        heading.innerHTML = text
+            .split('')
+            .map((letter, index) => {
+                if (letter !== ' ') { // Skip empty spaces
+                    const letterElement = document.createElement('div');
+                    letterElement.classList.add('letter');
+                    letterElement.style.setProperty('--delay', 0.2);
+                    letterElement.style.setProperty('--index', index);
+                    letterElement.textContent = letter;
+                    isSpace = false; // Reset the flag when a non-space character is encountered
+                    return letterElement.outerHTML;
+                } else if (!isSpace) { // Add space only if it's not an unnecessary space
+                    isSpace = true; // Set the flag to true for unnecessary spaces
+                    return ' ';
+                }
+                return '';
+            })
+            .join('');
+    });
+}
+
+
 if (window.innerWidth <= 991) {
 
     console.log(" ================== is-touch ================== ");
 
     window.onload = function () {
+        initiateLenis();
 
         let mobileTl = gsap.timeline();
         mobileTl.to('.loader', {
@@ -34,20 +73,73 @@ if (window.innerWidth <= 991) {
         })
 
 
-    //    let slider = document.querySelector('#showcase-panels');
-       let innerSliders = document.querySelectorAll('.slide-group')
-       innerSliders.forEach((slider)=>{
-        Draggable.create(slider,{
-            type: "x",
-            bounds:$('.showcase-main'),
-            edgeResistance: 0.65,
+        let innerSliders = document.querySelectorAll('.slide-group')
+        innerSliders.forEach((slider) => {
+            Draggable.create(slider, {
+                type: "x",
+                bounds: $('.showcase-main'),
+                edgeResistance: 0.65,
+            })
         })
-       })
-       
 
-       
 
-    
+
+        chopHeadingsToLetters(document.querySelectorAll('.heading-1'));
+        gsap.utils.toArray('.heading-1').forEach(el => {
+            gsap.to(el, {
+
+                scrollTrigger: {
+                    trigger: el,
+                    toggleClass: 'char',
+                    start: 'top bottom',
+                    // markers: true,
+                    toggleActions: 'play none none none',
+                },
+                // stagger: 0.2
+            });
+        });
+
+
+        const headerTl = gsap.timeline({
+            paused: true
+        })
+        const animateOpenNav = () => {
+            headerTl.to("#nav-container", 0.7, {
+                x: '0%',
+                // autoAlpha: 1,
+                delay: 0.1,
+                ease: 'power3.out',
+            })
+
+            const navLinks = document.querySelectorAll('#nav-container .nav-link');
+            navLinks.forEach((navLink) => {
+
+                const letters = gsap.utils.toArray(navLink.children);
+                headerTl.to(letters, 0.2, {
+                    scaleY: 1,
+                    // duration: 0.5,
+                    ease: 'power3.out',
+                    // stagger: 0.1,
+                }).reverse();
+            })
+        }
+
+        const openNav = () => {
+            animateOpenNav();
+            chopHeadingsToLetters(document.querySelectorAll("#nav-container .nav-link-wrapper .nav-link"));
+            const navBtn = document.getElementById('menu-toggle-btn');
+            navBtn.onclick = function (e) {
+                navBtn.classList.toggle('active');
+                if (navBtn.classList.contains('active')) {
+                    headerTl.reverse();
+                } else {
+                }
+                headerTl.reversed(!headerTl.reversed())
+            }
+        }
+        openNav();
+
+
 
 
     }
@@ -63,7 +155,7 @@ else {
     console.log("================== no-touch ================== ");
 
     function fitFirstLastSections() {
-        // controlling landing section's width to extactly match the available space on the screen excluding the space that bands are taking up.
+        //NOTE: controlling landing section's width to extactly match the available space on the screen excluding the space that bands are taking up.
         const landingSection = document.querySelector(".intro-section");
         landingSection.style.width = (window.innerWidth - document.querySelector('.bands').offsetWidth) + 'px';
         landingSection.querySelector('.intro-main').style.height = (window.innerHeight - landingSection.querySelector('header').offsetHeight) + 'px';
@@ -348,32 +440,9 @@ else {
     // ======== Showcase Navbar animation end ========
 
 
-    const headings = document.querySelectorAll('.heading-1');
-    headings.forEach(heading => {
-        const text = heading.textContent.trim(); // Trim leading and trailing whitespace
-        let isSpace = false; // Flag to track unnecessary spaces
-        heading.innerHTML = text
-            .split('')
-            .map((letter, index) => {
-                if (letter !== ' ') { // Skip empty spaces
-                    const letterElement = document.createElement('div');
-                    letterElement.classList.add('letter');
-                    letterElement.style.setProperty('--delay', 0.2);
-                    letterElement.style.setProperty('--index', index);
-                    letterElement.textContent = letter;
-                    isSpace = false; // Reset the flag when a non-space character is encountered
-                    return letterElement.outerHTML;
-                } else if (!isSpace) { // Add space only if it's not an unnecessary space
-                    isSpace = true; // Set the flag to true for unnecessary spaces
-                    return ' ';
-                }
-                return '';
-            })
-            .join('');
-    });
 
 
-
+    chopHeadingsToLetters(document.querySelectorAll('.heading-1'));
     gsap.utils.toArray('.heading-1').forEach(el => {
         gsap.to(el, {
 

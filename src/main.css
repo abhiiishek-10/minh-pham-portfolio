@@ -1028,7 +1028,7 @@ header nav .nav-link
     position: fixed;
     inset: 0;
     background: var(--primary-light);
-    z-index: 999999;
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1039,7 +1039,30 @@ header nav .nav-link
 
 @media (max-width: 991px)
 {
+    html.lenis
+    {
+        height: auto;
+    }
 
+    .lenis.lenis-smooth
+    {
+        scroll-behavior: auto !important;
+    }
+
+    .lenis.lenis-smooth [data-lenis-prevent]
+    {
+        overscroll-behavior: contain;
+    }
+
+    .lenis.lenis-stopped
+    {
+        overflow: hidden;
+    }
+
+    .lenis.lenis-scrolling iframe
+    {
+        pointer-events: none;
+    }
 
 
     /*=============================================
@@ -1123,7 +1146,7 @@ header nav .nav-link
         display: block;
         padding-block: min(25px, 4.123vh);
         position: fixed;
-        z-index: 99;
+        z-index: 50;
         width: 100%;
     }
 
@@ -1136,6 +1159,90 @@ header nav .nav-link
     {
         display: none;
     }
+
+    .mobile-header .menu-toggler
+    {
+        all: unset;
+        backdrop-filter: blur(10px);
+        background: var(--black-20);
+        border-radius: 100px;
+        padding: 6px 12px;
+        border: none;
+        font-family: inherit;
+        font-size: inherit;
+        cursor: pointer;
+        position: relative;
+        z-index: 52;
+    }
+
+    .mobile-header .menu-toggler span
+    {
+        font-weight: 400;
+        color: var(--primary-dark);
+    }
+
+    .mobile-header .menu-toggler .open
+    {
+        display: none;
+    }
+
+    .mobile-header nav
+    {
+        transform: translateX(-100%);
+        position: fixed;
+        width: 100vw;
+        height: 100dvh;
+        top: 0;
+        left: 0;
+        /* transition: all 0.3s; */
+        /* visibility: hidden; */
+        z-index: 51;
+        background: var(--primary-dark);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .mobile-header nav .nav-link-wrapper
+    {
+        width: 100%;
+        height: calc(100% / 3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid var(--black-20);
+    }
+
+    .mobile-header nav .nav-link-wrapper:first-child
+    {
+        margin-top: 6rem;
+        border-top: 1px solid var(--black-20);
+    }
+
+    .mobile-header nav .nav-link-wrapper a
+    {
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+        display: block;
+        font-size: calc((10.22222vw + 86.66667px));
+    }
+
+    .mobile-header nav .nav-link-wrapper a .letter
+    {
+        display: inline-flex;
+        transform-origin: bottom;
+        transform: scaleY(0);
+        transition: transform 0s;
+        transition: transform .75s cubic-bezier(.215, .61, .355, 1) calc(var(--index)*0.075s + var(--delay)*1s);
+    }
+
+    /* .mobile-header .menu-toggler.active~nav .nav-link-wrapper a .letter
+    {
+
+        transform: scaleY(1);
+    } */
 
     /*=====  End of header  ======*/
 
@@ -1183,6 +1290,11 @@ header nav .nav-link
     .intro-content .heading-1
     {
         display: inline-block;
+    }
+
+    .intro-content h1.heading-1
+    {
+        margin-right: 20px;
     }
 
     .intro-content .intro-desc
@@ -1324,16 +1436,24 @@ header nav .nav-link
     /*=============================================
     =            Contact            =
     =============================================*/
+    .contact-section
+    {
+        min-height: 70dvh;
+    }
 
     .contact-main
     {
         height: auto;
         display: block;
+        padding-top: clamp(60px, 120px, 6.250vw);
+        padding-bottom: clamp(28px, 48px, 2.5vw);
+        padding-inline: clamp(30px, 60px, 3.125vw);
     }
 
     .contact-content-left
     {
         width: 100%;
+        padding: 0;
     }
 
     .contact-img
@@ -1357,6 +1477,30 @@ header nav .nav-link
 
 
 
+
+
+}
+
+
+
+@media (max-width:768px)
+{
+
+
+
+
+
+    /*=============================================
+    =            Contact            =
+    =============================================*/
+
+    .connect-links
+    {
+        max-width: 50%;
+    }
+
+
+    /*=====  End of Contact  ======*/
 
 
 }

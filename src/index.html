@@ -38,16 +38,27 @@
         <div class="flex items-center justify-between">
             <a class="font-chill site-logo  logo-colored  ">Minh
                 Pham</a>
-            <nav class="flex items-center justify-center">
-                <a href="#_" class="nav-link p-md ">
-                    Works
-                </a>
-                <a href="#_" class="nav-link p-md ">
-                    About
-                </a>
-                <a href="#_" class="nav-link p-md ">
-                    Contact
-                </a>
+            <button class="menu-toggler " id="menu-toggle-btn">
+                <span class="open nav-link p-md">CLOSE</span>
+                <span class="closed nav-link p-md">MENU</span>
+            </button>
+            <nav id="nav-container" class="flex items-center justify-center">
+                <div class="nav-link-wrapper">
+                    <a href="#_" class="nav-link p-md font-bebas">
+                        Works
+                    </a>
+                </div>
+                <div class="nav-link-wrapper">
+                    <a href="#_" class="nav-link p-md font-bebas">
+                        About
+                    </a>
+                </div>
+                <div class="nav-link-wrapper">
+                    <a href="#_" class="nav-link p-md font-bebas">
+                        Contact
+                    </a>
+                </div>
+
             </nav>
         </div>
     </header>
@@ -544,6 +555,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/Draggable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
 
     <!-- <script src="https://unpkg.co/gsap@3/dist/gsap.min.js"></script>
     <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
