@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Document</title>
 
     <!-- <link rel="stylesheet" href="../dist/output.css"> -->
@@ -15,6 +16,9 @@
     <div class="loader">
         <p class="subtitle">Loading</p>
     </div>
+    <div class="cursor">
+        <div class="cursor-circle"></div>
+    </div>
     <!-- ====== Bands start ====== -->
 
     <div class="bands ">
@@ -24,7 +28,7 @@
         </a>
         <a id="band-2" data-section="#sec-2" class="band " id="band-2" data-section="#sec-2">
             <span class="band-content ">02</span>
-            <span class="band-content bottom">Work</span>
+            <span class="band-content bottom">Works</span>
         </a>
         <a id="band-3" data-section="#sec-3" class="band " id="band-3" data-section="#sec-3">
             <span class="band-content ">03</span>
@@ -36,25 +40,25 @@
     <!-- ====== Mobile Header ====== -->
     <header class="mobile-header header-with-bg">
         <div class="flex items-center justify-between">
-            <a class="font-chill site-logo  logo-colored  ">Minh
+            <a href="#" class="font-chill site-logo  logo-colored  ">Minh
                 Pham</a>
             <button class="menu-toggler " id="menu-toggle-btn">
-                <span class="open nav-link p-md">CLOSE</span>
+                <span class="open nav-link p-md d-none">CLOSE</span>
                 <span class="closed nav-link p-md">MENU</span>
             </button>
             <nav id="nav-container" class="flex items-center justify-center">
                 <div class="nav-link-wrapper">
-                    <a href="#_" class="nav-link p-md font-bebas">
-                        Works
-                    </a>
-                </div>
-                <div class="nav-link-wrapper">
-                    <a href="#_" class="nav-link p-md font-bebas">
+                    <a href="#sec-1" class="nav-link p-md font-bebas">
                         About
                     </a>
                 </div>
                 <div class="nav-link-wrapper">
-                    <a href="#_" class="nav-link p-md font-bebas">
+                    <a href="#sec-2" class="nav-link p-md font-bebas">
+                        Works
+                    </a>
+                </div>
+                <div class="nav-link-wrapper">
+                    <a href="#sec-3" class="nav-link p-md font-bebas">
                         Contact
                     </a>
                 </div>
@@ -79,14 +83,15 @@
                 <!-- header start -->
                 <header class="header-with-bg">
                     <div class="flex items-center justify-between">
-                        <a class="font-chill site-logo  logo-colored  ">Minh
+                        <a href="#" class="font-chill site-logo  logo-colored  ">Minh
                             Pham</a>
                         <nav class="flex items-center justify-center">
-                            <a href="#_" class="nav-link p-md ">
-                                Works
-                            </a>
+
                             <a href="#_" class="nav-link p-md ">
                                 About
+                            </a>
+                            <a href="#_" class="nav-link p-md ">
+                                Works
                             </a>
                             <a href="#_" class="nav-link p-md ">
                                 Contact
@@ -116,11 +121,10 @@
 
                         <!-- spinning svg start -->
                         <div class="spinner">
-                            <svg width="113" height="112" viewBox="0 0 113 112" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
+                            <svg viewBox="0 0 113 112" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M54.7283 4.13269C54.7283 8.13098 55.8508 18.9596 56.0161 18.9596C56.1815 18.9596 57.3039 8.13098 57.3039 4.13269C57.3039 0.134371 56.1815 0 56.0161 0C55.8508 0 54.7283 0.134371 54.7283 4.13269ZM58.8192 46.2488C58.8192 36.6939 56.3819 18.9596 56.0227 18.9596C55.6635 18.9596 53.2261 36.6939 53.2261 46.2488C53.2261 46.4091 53.2267 46.5667 53.2281 46.7218C52.8259 46.2846 52.3847 45.8237 51.9008 45.3379C45.186 38.5972 31.0035 27.8123 30.7502 28.0666C30.4967 28.3211 41.2403 42.5583 47.9549 49.2988C49.191 50.5397 50.2655 51.5013 51.1976 52.2428C49.8865 52.047 48.2114 51.9232 46.0711 51.9232C36.5529 51.9232 18.8867 54.37 18.8867 54.7305C18.8867 55.0912 36.5529 57.538 46.0711 57.538C47.3766 57.538 48.5092 57.4919 49.4914 57.4115C49.0094 57.8537 48.4977 58.3448 47.9549 58.8896C41.2403 65.6303 30.4967 79.8675 30.7502 80.1218C31.0035 80.3762 45.186 69.5913 51.9008 62.8507C52.429 62.3202 52.9066 61.8195 53.3379 61.347C53.2666 62.2907 53.2261 63.3686 53.2261 64.6C53.2261 74.1548 55.6635 91.8891 56.0227 91.8891C56.3819 91.8891 58.8192 74.1548 58.8192 64.6C58.8192 63.3574 58.778 62.271 58.7055 61.3211C59.1429 61.8013 59.6282 62.3106 60.1661 62.8507C66.8808 69.5913 81.0633 80.3762 81.3167 80.1218C81.5701 79.8675 70.8265 65.6303 64.1119 58.8896C63.5692 58.345 63.0577 57.854 62.5758 57.4119C63.519 57.4843 64.5978 57.5255 65.8314 57.5255C75.3274 57.5255 92.9527 55.0845 92.9527 54.7246C92.9527 54.3649 75.3274 51.9238 65.8314 51.9238C63.7962 51.9238 62.1828 52.0359 60.9034 52.2157C61.8276 51.4778 62.8908 50.5246 64.1119 49.2988C70.8265 42.5583 81.5701 28.3211 81.3167 28.0666C81.0633 27.8123 66.8808 38.5972 60.1661 45.3379C59.6734 45.8324 59.225 46.3012 58.8169 46.7454C58.8185 46.5827 58.8192 46.4171 58.8192 46.2488ZM54.7283 106.716C54.7283 102.718 55.8508 91.8893 56.0161 91.8893C56.1815 91.8893 57.3039 102.718 57.3039 106.716C57.3039 110.714 56.1815 110.849 56.0161 110.849C55.8508 110.849 54.7283 110.714 54.7283 106.716ZM18.8867 54.7371C18.8867 54.9031 8.09974 56.0299 4.1168 56.0299C0.133854 56.0299 0 54.9031 0 54.7371C0 54.5711 0.133854 53.4444 4.1168 53.4444C8.09974 53.4444 18.8867 54.5711 18.8867 54.7371ZM107.689 56.0204C103.715 56.0204 92.9529 54.8962 92.9529 54.7307C92.9529 54.565 103.715 53.4409 107.689 53.4409C111.662 53.4409 111.796 54.565 111.796 54.7307C111.796 54.8962 111.662 56.0204 107.689 56.0204ZM81.3124 80.128C81.1958 80.2451 88.0138 88.6792 90.8237 91.4998C93.6335 94.3205 94.5198 93.6205 94.6364 93.5033C94.7531 93.3863 95.4504 92.4966 92.6405 89.676C89.8307 86.8553 81.4291 80.0109 81.3124 80.128ZM21.2431 91.4998C24.053 88.6792 30.8712 80.2451 30.7545 80.128C30.6377 80.0109 22.2361 86.8553 19.4263 89.676C16.6164 92.4966 17.3137 93.3863 17.4305 93.5033C17.547 93.6205 18.4333 94.3205 21.2431 91.4998ZM30.7545 28.0605C30.8712 27.9434 24.053 19.5093 21.2431 16.6886C18.4333 13.8679 17.547 14.5679 17.4305 14.6851C17.3137 14.8022 16.6164 15.6919 19.4263 18.5126C22.2361 21.3333 30.6377 28.1776 30.7545 28.0605ZM90.8237 16.6886C88.0138 19.5093 81.1958 27.9434 81.3124 28.0605C81.4291 28.1776 89.8307 21.3333 92.6405 18.5126C95.4504 15.6919 94.7531 14.8022 94.6364 14.6851C94.5198 14.5679 93.6335 13.8679 90.8237 16.6886Z"
-                                    fill="#A8CD19" />
+                                    fill="var(--primary-dark)" />
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M54.7283 4.13269C54.7283 8.13098 55.8508 18.9596 56.0161 18.9596C56.1815 18.9596 57.3039 8.13098 57.3039 4.13269C57.3039 0.134371 56.1815 0 56.0161 0C55.8508 0 54.7283 0.134371 54.7283 4.13269ZM58.8192 46.2488C58.8192 36.6939 56.3819 18.9596 56.0227 18.9596C55.6635 18.9596 53.2261 36.6939 53.2261 46.2488C53.2261 46.4091 53.2267 46.5667 53.2281 46.7218C52.8259 46.2846 52.3847 45.8237 51.9008 45.3379C45.186 38.5972 31.0035 27.8123 30.7502 28.0666C30.4967 28.3211 41.2403 42.5583 47.9549 49.2988C49.191 50.5397 50.2655 51.5013 51.1976 52.2428C49.8865 52.047 48.2114 51.9232 46.0711 51.9232C36.5529 51.9232 18.8867 54.37 18.8867 54.7305C18.8867 55.0912 36.5529 57.538 46.0711 57.538C47.3766 57.538 48.5092 57.4919 49.4914 57.4115C49.0094 57.8537 48.4977 58.3448 47.9549 58.8896C41.2403 65.6303 30.4967 79.8675 30.7502 80.1218C31.0035 80.3762 45.186 69.5913 51.9008 62.8507C52.429 62.3202 52.9066 61.8195 53.3379 61.347C53.2666 62.2907 53.2261 63.3686 53.2261 64.6C53.2261 74.1548 55.6635 91.8891 56.0227 91.8891C56.3819 91.8891 58.8192 74.1548 58.8192 64.6C58.8192 63.3574 58.778 62.271 58.7055 61.3211C59.1429 61.8013 59.6282 62.3106 60.1661 62.8507C66.8808 69.5913 81.0633 80.3762 81.3167 80.1218C81.5701 79.8675 70.8265 65.6303 64.1119 58.8896C63.5692 58.345 63.0577 57.854 62.5758 57.4119C63.519 57.4843 64.5978 57.5255 65.8314 57.5255C75.3274 57.5255 92.9527 55.0845 92.9527 54.7246C92.9527 54.3649 75.3274 51.9238 65.8314 51.9238C63.7962 51.9238 62.1828 52.0359 60.9034 52.2157C61.8276 51.4778 62.8908 50.5246 64.1119 49.2988C70.8265 42.5583 81.5701 28.3211 81.3167 28.0666C81.0633 27.8123 66.8808 38.5972 60.1661 45.3379C59.6734 45.8324 59.225 46.3012 58.8169 46.7454C58.8185 46.5827 58.8192 46.4171 58.8192 46.2488ZM54.7283 106.716C54.7283 102.718 55.8508 91.8893 56.0161 91.8893C56.1815 91.8893 57.3039 102.718 57.3039 106.716C57.3039 110.714 56.1815 110.849 56.0161 110.849C55.8508 110.849 54.7283 110.714 54.7283 106.716ZM18.8867 54.7371C18.8867 54.9031 8.09974 56.0299 4.1168 56.0299C0.133854 56.0299 0 54.9031 0 54.7371C0 54.5711 0.133854 53.4444 4.1168 53.4444C8.09974 53.4444 18.8867 54.5711 18.8867 54.7371ZM107.689 56.0204C103.715 56.0204 92.9529 54.8962 92.9529 54.7307C92.9529 54.565 103.715 53.4409 107.689 53.4409C111.662 53.4409 111.796 54.565 111.796 54.7307C111.796 54.8962 111.662 56.0204 107.689 56.0204ZM81.3124 80.128C81.1958 80.2451 88.0138 88.6792 90.8237 91.4998C93.6335 94.3205 94.5198 93.6205 94.6364 93.5033C94.7531 93.3863 95.4504 92.4966 92.6405 89.676C89.8307 86.8553 81.4291 80.0109 81.3124 80.128ZM21.2431 91.4998C24.053 88.6792 30.8712 80.2451 30.7545 80.128C30.6377 80.0109 22.2361 86.8553 19.4263 89.676C16.6164 92.4966 17.3137 93.3863 17.4305 93.5033C17.547 93.6205 18.4333 94.3205 21.2431 91.4998ZM30.7545 28.0605C30.8712 27.9434 24.053 19.5093 21.2431 16.6886C18.4333 13.8679 17.547 14.5679 17.4305 14.6851C17.3137 14.8022 16.6164 15.6919 19.4263 18.5126C22.2361 21.3333 30.6377 28.1776 30.7545 28.0605ZM90.8237 16.6886C88.0138 19.5093 81.1958 27.9434 81.3124 28.0605C81.4291 28.1776 89.8307 21.3333 92.6405 18.5126C95.4504 15.6919 94.7531 14.8022 94.6364 14.6851C94.5198 14.5679 93.6335 13.8679 90.8237 16.6886Z"
                                     fill="black" fill-opacity="0.2" />
@@ -183,14 +187,14 @@
                 <div class="header-wrapper">
                     <header class="header">
                         <div class="flex items-center justify-between">
-                            <a class="font-chill site-logo ">Minh
+                            <a href="#" class="font-chill site-logo ">Minh
                                 Pham</a>
                             <nav class="flex items-center justify-center">
                                 <a href="#_" class="nav-link p-md ">
-                                    Works
+                                    About
                                 </a>
                                 <a href="#_" class="nav-link p-md ">
-                                    About
+                                    Works
                                 </a>
                                 <a href="#_" class="nav-link p-md ">
                                     Contact
@@ -269,9 +273,6 @@
             </section>
             <!-- ====== About Section end ====== -->
 
-
-
-
             <!-- ====== Showcases Section start ====== -->
             <section id="sec-2" class="section showcase-section" data-section="band-3">
 
@@ -279,14 +280,14 @@
                 <div class="header-wrapper">
                     <header class="header header-with-bg">
                         <div class="flex items-center justify-between">
-                            <a class="font-chill site-logo logo-colored">Minh
+                            <a href="#" class="font-chill site-logo logo-colored">Minh
                                 Pham</a>
                             <nav class="flex items-center justify-center">
                                 <a href="#_" class="nav-link p-md ">
-                                    Works
+                                    About
                                 </a>
                                 <a href="#_" class="nav-link p-md ">
-                                    About
+                                    Works
                                 </a>
                                 <a href="#_" class="nav-link p-md ">
                                     Contact
@@ -306,7 +307,7 @@
                 <!-- showcases content start -->
                 <div class="showcase-main">
                     <div class="showcase-heading ">
-                        <h2 class="heading-1">
+                        <h2 class="heading-1" id="sticky-showcase-title">
                             Showcases
                         </h2>
                     </div>
@@ -317,19 +318,22 @@
                                 <h3 class="subtitle">Portfolio</h3>
                             </div>
                             <div class=" showcase-slide">
-                                <div class=" showcase-img overflow-hidden">
-                                    <img src="../assets/imgs/show-case-1.jpg" alt="show-case-img">
-                                </div>
+                                <a href="#" class=" showcase-img overflow-hidden">
+                                    <img src="https://s3-alpha-sig.figma.com/img/c7ee/083d/844040df688b994bca180d283a515d93?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Jfu7nTBXKUhYBdBjt1gzF0s36WLpPEQ9MUoxobAptws2xQKChCCkhC80KWe6Wx0Bww-CfTFH120vySz-1OXiHQAxTsXF6yNbUDUvDhJ09w02ceTlCxa2-2ZEGrQgTsfmyeV6aVUzdDc7-zQQKfu7FKXjOjXATvu1P0CxMzapzS53Wuj5qa7ZmEU~soaxG6xFBMJlrW6uLhdWcpSf6m-i9OWmauzyaTFiZWkaHotr0GFCHYLgzdAHNzVY2k8rz4o-BOcJTHaCJKWd7HVVL5sVf4m9en7X1aDcUxzGl7qTYCS8H4enYF8Mjv2RGGcaoLU5dZTSiLb-loNjNAKsyU8d8A__"
+                                        alt="show-case-img">
+                                </a>
                             </div>
                             <div class=" showcase-slide">
-                                <div class=" showcase-img overflow-hidden">
-                                    <img src="../assets/imgs/show-case-1.jpg" alt="show-case-img">
-                                </div>
+                                <a href="#" class=" showcase-img overflow-hidden">
+                                    <img src="https://s3-alpha-sig.figma.com/img/c7ee/083d/844040df688b994bca180d283a515d93?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Jfu7nTBXKUhYBdBjt1gzF0s36WLpPEQ9MUoxobAptws2xQKChCCkhC80KWe6Wx0Bww-CfTFH120vySz-1OXiHQAxTsXF6yNbUDUvDhJ09w02ceTlCxa2-2ZEGrQgTsfmyeV6aVUzdDc7-zQQKfu7FKXjOjXATvu1P0CxMzapzS53Wuj5qa7ZmEU~soaxG6xFBMJlrW6uLhdWcpSf6m-i9OWmauzyaTFiZWkaHotr0GFCHYLgzdAHNzVY2k8rz4o-BOcJTHaCJKWd7HVVL5sVf4m9en7X1aDcUxzGl7qTYCS8H4enYF8Mjv2RGGcaoLU5dZTSiLb-loNjNAKsyU8d8A__"
+                                        alt="show-case-img">
+                                </a>
                             </div>
                             <div class=" showcase-slide">
-                                <div class=" showcase-img overflow-hidden">
-                                    <img src="../assets/imgs/show-case-1.jpg" alt="show-case-img">
-                                </div>
+                                <a href="#" class=" showcase-img overflow-hidden">
+                                    <img src="https://s3-alpha-sig.figma.com/img/c7ee/083d/844040df688b994bca180d283a515d93?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Jfu7nTBXKUhYBdBjt1gzF0s36WLpPEQ9MUoxobAptws2xQKChCCkhC80KWe6Wx0Bww-CfTFH120vySz-1OXiHQAxTsXF6yNbUDUvDhJ09w02ceTlCxa2-2ZEGrQgTsfmyeV6aVUzdDc7-zQQKfu7FKXjOjXATvu1P0CxMzapzS53Wuj5qa7ZmEU~soaxG6xFBMJlrW6uLhdWcpSf6m-i9OWmauzyaTFiZWkaHotr0GFCHYLgzdAHNzVY2k8rz4o-BOcJTHaCJKWd7HVVL5sVf4m9en7X1aDcUxzGl7qTYCS8H4enYF8Mjv2RGGcaoLU5dZTSiLb-loNjNAKsyU8d8A__"
+                                        alt="show-case-img">
+                                </a>
                             </div>
                         </div>
                         <div id="dribbble" class="slide-group flex">
@@ -337,14 +341,16 @@
                                 <h3 class="subtitle">Dribbble</h3>
                             </div>
                             <div class=" showcase-slide">
-                                <div class=" showcase-img overflow-hidden">
-                                    <img src="../assets/imgs/show-case-2.jpg" alt="show-case-img">
-                                </div>
+                                <a href="#" class=" showcase-img overflow-hidden">
+                                    <img src="https://s3-alpha-sig.figma.com/img/99a9/2211/f8da9663ae89df519fefa1a80fba768b?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K73yjbiZq9l21qaTEuAIytPV1diM6ry4YaNwudgPCk-PKf1Yb6B6gFdKV2Rb6~6RixG~QtdyXj6MNZtU7ecRuN8tEKfswL5QLZdvwloYeLyB-rC8jPKnv5hXg16xmpCokMsq4QMGv1SQxc8amRnnQgdVr2fTcdu3HXOWY8Sac56rbKVEiu0uxWxAa0ilCbN3ATTps-0QjlrvSCfjVrK-aCPvG97niry1Xqv7RldA1IHJptbu3JxNfuEr2t2OpLnCWreWcem7LBqxGvZwi4PKVgFTgzJflBhoW4o-PxuheGowjQ4DR2hOJMUqhhRh4Q1LfoZFgMMFGRYg46zoaDRgeg__"
+                                        alt="show-case-img">
+                                </a>
                             </div>
                             <div class=" showcase-slide">
-                                <div class=" showcase-img overflow-hidden">
-                                    <img src="../assets/imgs/show-case-2.jpg" alt="show-case-img">
-                                </div>
+                                <a href="#" class=" showcase-img overflow-hidden">
+                                    <img src="https://s3-alpha-sig.figma.com/img/99a9/2211/f8da9663ae89df519fefa1a80fba768b?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K73yjbiZq9l21qaTEuAIytPV1diM6ry4YaNwudgPCk-PKf1Yb6B6gFdKV2Rb6~6RixG~QtdyXj6MNZtU7ecRuN8tEKfswL5QLZdvwloYeLyB-rC8jPKnv5hXg16xmpCokMsq4QMGv1SQxc8amRnnQgdVr2fTcdu3HXOWY8Sac56rbKVEiu0uxWxAa0ilCbN3ATTps-0QjlrvSCfjVrK-aCPvG97niry1Xqv7RldA1IHJptbu3JxNfuEr2t2OpLnCWreWcem7LBqxGvZwi4PKVgFTgzJflBhoW4o-PxuheGowjQ4DR2hOJMUqhhRh4Q1LfoZFgMMFGRYg46zoaDRgeg__"
+                                        alt="show-case-img">
+                                </a>
                             </div>
                         </div>
                         <div id="behance" class="slide-group flex">
@@ -352,9 +358,10 @@
                                 <h3 class="subtitle">Behance</h3>
                             </div>
                             <div class=" showcase-slide">
-                                <div class=" showcase-img overflow-hidden">
-                                    <img src="../assets/imgs/show-case-1.jpg" alt="show-case-img">
-                                </div>
+                                <a href="#" class=" showcase-img overflow-hidden">
+                                    <img src="https://s3-alpha-sig.figma.com/img/c7ee/083d/844040df688b994bca180d283a515d93?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Jfu7nTBXKUhYBdBjt1gzF0s36WLpPEQ9MUoxobAptws2xQKChCCkhC80KWe6Wx0Bww-CfTFH120vySz-1OXiHQAxTsXF6yNbUDUvDhJ09w02ceTlCxa2-2ZEGrQgTsfmyeV6aVUzdDc7-zQQKfu7FKXjOjXATvu1P0CxMzapzS53Wuj5qa7ZmEU~soaxG6xFBMJlrW6uLhdWcpSf6m-i9OWmauzyaTFiZWkaHotr0GFCHYLgzdAHNzVY2k8rz4o-BOcJTHaCJKWd7HVVL5sVf4m9en7X1aDcUxzGl7qTYCS8H4enYF8Mjv2RGGcaoLU5dZTSiLb-loNjNAKsyU8d8A__"
+                                        alt="show-case-img">
+                                </a>
                             </div>
                         </div>
                         <div id="telegram" class="slide-group flex">
@@ -362,26 +369,29 @@
                                 <h3 class="subtitle">Telegram</h3>
                             </div>
                             <div class=" showcase-slide">
-                                <div class=" showcase-img overflow-hidden">
-                                    <img src="../assets/imgs/show-case-2.jpg" alt="show-case-img">
-                                </div>
+                                <a href="#" class=" showcase-img overflow-hidden">
+                                    <img src="https://s3-alpha-sig.figma.com/img/99a9/2211/f8da9663ae89df519fefa1a80fba768b?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K73yjbiZq9l21qaTEuAIytPV1diM6ry4YaNwudgPCk-PKf1Yb6B6gFdKV2Rb6~6RixG~QtdyXj6MNZtU7ecRuN8tEKfswL5QLZdvwloYeLyB-rC8jPKnv5hXg16xmpCokMsq4QMGv1SQxc8amRnnQgdVr2fTcdu3HXOWY8Sac56rbKVEiu0uxWxAa0ilCbN3ATTps-0QjlrvSCfjVrK-aCPvG97niry1Xqv7RldA1IHJptbu3JxNfuEr2t2OpLnCWreWcem7LBqxGvZwi4PKVgFTgzJflBhoW4o-PxuheGowjQ4DR2hOJMUqhhRh4Q1LfoZFgMMFGRYg46zoaDRgeg__"
+                                        alt="show-case-img">
+                                </a>
                             </div>
                             <div class=" showcase-slide">
-                                <div class=" showcase-img overflow-hidden">
-                                    <img src="../assets/imgs/show-case-2.jpg" alt="show-case-img">
-                                </div>
+                                <a href="#" class=" showcase-img overflow-hidden">
+                                    <img src="https://s3-alpha-sig.figma.com/img/99a9/2211/f8da9663ae89df519fefa1a80fba768b?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K73yjbiZq9l21qaTEuAIytPV1diM6ry4YaNwudgPCk-PKf1Yb6B6gFdKV2Rb6~6RixG~QtdyXj6MNZtU7ecRuN8tEKfswL5QLZdvwloYeLyB-rC8jPKnv5hXg16xmpCokMsq4QMGv1SQxc8amRnnQgdVr2fTcdu3HXOWY8Sac56rbKVEiu0uxWxAa0ilCbN3ATTps-0QjlrvSCfjVrK-aCPvG97niry1Xqv7RldA1IHJptbu3JxNfuEr2t2OpLnCWreWcem7LBqxGvZwi4PKVgFTgzJflBhoW4o-PxuheGowjQ4DR2hOJMUqhhRh4Q1LfoZFgMMFGRYg46zoaDRgeg__"
+                                        alt="show-case-img">
+                                </a>
                             </div>
                             <div class=" showcase-slide">
-                                <div class=" showcase-img overflow-hidden">
-                                    <img src="../assets/imgs/show-case-2.jpg" alt="show-case-img">
-                                </div>
+                                <a href="#" class=" showcase-img overflow-hidden">
+                                    <img src="https://s3-alpha-sig.figma.com/img/99a9/2211/f8da9663ae89df519fefa1a80fba768b?Expires=1708300800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=K73yjbiZq9l21qaTEuAIytPV1diM6ry4YaNwudgPCk-PKf1Yb6B6gFdKV2Rb6~6RixG~QtdyXj6MNZtU7ecRuN8tEKfswL5QLZdvwloYeLyB-rC8jPKnv5hXg16xmpCokMsq4QMGv1SQxc8amRnnQgdVr2fTcdu3HXOWY8Sac56rbKVEiu0uxWxAa0ilCbN3ATTps-0QjlrvSCfjVrK-aCPvG97niry1Xqv7RldA1IHJptbu3JxNfuEr2t2OpLnCWreWcem7LBqxGvZwi4PKVgFTgzJflBhoW4o-PxuheGowjQ4DR2hOJMUqhhRh4Q1LfoZFgMMFGRYg46zoaDRgeg__"
+                                        alt="show-case-img">
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- showcases content end -->
 
-                <!-- Showcases navbar fake Start -->
+                <!-- Showcases navbar Start -->
                 <div id="showcase-nav" class="showcase-nav-wrapper">
                     <div class="showcase-nav">
                         <a href="#" class="showcase-nav-link p-reg showcase-nav__active "><span>Projects</span></a><a
@@ -390,7 +400,7 @@
                             class="showcase-nav-link p-reg "><span>Telegram</span></a>
                     </div>
                 </div>
-                <!-- Showcases navbar fake end -->
+                <!-- Showcases navbar end -->
 
 
 
@@ -406,14 +416,14 @@
                 <div class="header-wrapper">
                     <header class="header header-with-bg">
                         <div class="flex items-center justify-between">
-                            <a class="font-chill site-logo logo-colored">Minh
+                            <a href="#" class="font-chill site-logo logo-colored">Minh
                                 Pham</a>
                             <nav class="flex items-center justify-center">
                                 <a href="#_" class="nav-link p-md ">
-                                    Works
+                                    About
                                 </a>
                                 <a href="#_" class="nav-link p-md ">
-                                    About
+                                    Works
                                 </a>
                                 <a href="#_" class="nav-link p-md ">
                                     Contact
@@ -443,7 +453,7 @@
                                 </h2>
                             </div>
                             <div class="contact-msg">
-                                <a href="#" class="p-md">SEND ME A MESSAGE</a>
+                                <p class="p-md">SEND ME A MESSAGE</p>
                                 <a href="#" class="p-xxl">minh.pham@yudiz.com</a>
                             </div>
                         </div>
@@ -552,7 +562,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/Draggable.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>

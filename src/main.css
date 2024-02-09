@@ -101,7 +101,13 @@
     --black-50: #666666;
     --borderColor: #4D4D4D;
     --lightBorder: #B3B3B3;
+
+    --aboutBlue: #2B6984;
+    --showcaseGreen: #ABBA58;
+    --contactRoman: #d66b58;
 }
+
+
 
 html
 {
@@ -109,6 +115,8 @@ html
     /* IE and Edge */
     scrollbar-width: none;
     scroll-behavior: auto;
+    /* will-change: transform; */
+
 }
 
 html::-webkit-scrollbar
@@ -133,6 +141,7 @@ body
     overflow-x: hidden;
     font-family: 'Chillax';
     min-height: 100dvh;
+    /* will-change: transform; */
 }
 
 a
@@ -141,9 +150,48 @@ a
     text-decoration: inherit;
 }
 
+.cursor
+{
+    opacity: 1;
+    pointer-events: none;
+    position: fixed;
+    z-index: 50;
+    transform: translate3d(calc(var(--x)*1px), calc(var(--y)*1px), 0);
+    transform-origin: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.cursor-circle
+{
+    align-items: center;
+    background: var(--primary-dark);
+    border-radius: 100px;
+    display: flex;
+    height: 1.042vw;
+    justify-content: center;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 1.042vw;
+    position: relative;
+    will-change: transform, width;
+    z-index: 50;
+    translate: none;
+    rotate: none;
+    scale: none;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
 /*=============================================
 =            Utilities            =
 =============================================*/
+.d-none
+{
+    display: none;
+}
+
 .overflow-hidden
 {
     overflow: hidden;
@@ -293,7 +341,7 @@ a
 
 .bands
 {
-    height: 100dvh;
+    height: 100svh;
     right: 0;
     bottom: 0;
     position: fixed;
@@ -308,8 +356,9 @@ a
 .bands .band
 {
     width: 100px;
+    /* NOTE: If you are changing the width of the band, remember to keep the gap of .wrapper the same as this value. */
     background: var(--white);
-    height: 100dvh;
+    height: 100svh;
     position: relative;
     display: flex;
     align-items: center;
@@ -354,6 +403,7 @@ a
     align-items: flex-start;
     gap: 100px;
     will-change: transform;
+    /* NOTE: If you are changing the gap of the wrapper, remember to keep the width of .band the same as this value. */
 }
 
 /*=====  End of Wrapper  ======*/
@@ -366,8 +416,10 @@ a
 
 .section
 {
-    height: 100dvh;
+    height: 100svh;
     position: relative;
+    transition: all 0.4s;
+    background: var(--white);
 }
 
 /*=====  End of Section  ======*/
@@ -388,6 +440,7 @@ a
     width: 100%;
     top: 0;
     left: 0;
+    z-index: 2;
 }
 
 header
@@ -400,7 +453,7 @@ header
 .header-with-bg
 {
     background: var(--white);
-    border: 1px solid var(--lightBorder);
+    border-bottom: 1px solid var(--lightBorder);
 }
 
 header.header
@@ -411,8 +464,8 @@ header.header
 
 .site-logo
 {
-    font-size: clamp(28px, 32px, 1.667vw);
-    /* font-size: min(3.29vh, 1.66vw); */
+    /* font-size: clamp(28px, 32px, 1.667vw); */
+    font-size: min(3.29vh, 1.667vw);
     font-weight: 700;
     color: var(--black-20);
 
@@ -476,23 +529,30 @@ header nav .nav-link
 {
     display: block;
     position: relative;
-    width: 48px;
-    height: 28px;
+    width: 2.5vw;
+    height: 1.458vw;
     border-radius: 100px;
-    border: 2px solid var(--borderColor);
+    border: 0.110vw solid var(--borderColor);
 }
 
 .scroll-indicator>a>span
 {
-    width: 10px;
-    height: 10px;
+    width: 0.521vw;
+    height: 0.521vw;
     position: absolute;
     border-radius: 100%;
-    border: 3px solid var(--primary-dark);
+    /* border: 3px solid var(--primary-dark); */
+    border: 0.156vw solid var(--primary-dark);
     top: 50%;
     transform: translateY(-50%);
     left: 8px;
     animation: rightPull 1s ease 1s infinite;
+}
+
+.scroll-indicator>a>svg
+{
+    width: 1.042vw;
+    height: 0.625vw;
 }
 
 @keyframes rightPull
@@ -532,12 +592,13 @@ header nav .nav-link
 =============================================*/
 .intro-main
 {
-    height: calc(100dvh - 130px);
+    height: calc(100svh - 130px);
 }
 
 .intro-main .intro-img
 {
     width: min(684px, 30vw);
+    width: 35.625vw;
     height: 100%;
     object-fit: cover;
     object-position: top;
@@ -572,10 +633,12 @@ header nav .nav-link
     position: absolute;
     top: 10%;
     right: 5%;
-    width: fit-content;
-    height: fit-content;
+    width: 5.885vw;
+    height: 5.885vw;
     animation: spin 8s linear infinite;
 }
+
+
 
 @keyframes spin
 {
@@ -642,12 +705,13 @@ header nav .nav-link
 
 .about-main
 {
-    height: 100dvh;
+    height: 100svh;
 }
 
 .about-img
 {
-    width: min(796px, 40vw);
+    /* width: min(796px, 40vw); */
+    width: 41.458vw;
 }
 
 .about-img img
@@ -661,25 +725,27 @@ header nav .nav-link
 {
     min-width: 60vw;
     position: relative;
-    height: 100dvh;
+    height: 100svh;
 }
 
 .about-content
 {
-    padding-top: clamp(60px, 120px, 6.250vw);
+    /* padding-top: clamp(60px, 120px, 6.250vw); */
+    padding-top: 6.25vw;
     padding-left: clamp(30px, 60px, 3.125vw);
 }
 
 .about-content-header
 {
-    margin-bottom: 56px;
+    /* margin-bottom: 56px; */
+    margin-bottom: 2.917vw;
     width: fit-content;
 }
 
 .about-title
 {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 1.563vw;
     width: fit-content;
     font-weight: 700;
     color: var(--black-20);
@@ -688,7 +754,8 @@ header nav .nav-link
 .about-content-header p
 {
     font-weight: 400;
-    max-width: 700px;
+    /* max-width: 700px; */
+    max-width: 36.458vw;
     color: var(--black-50);
 
 }
@@ -698,8 +765,9 @@ header nav .nav-link
 {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    max-width: 700px;
+    gap: 1.042vw;
+    /* max-width: 700px; */
+    max-width: 36.458vw;
     margin-bottom: 40px;
 }
 
@@ -708,11 +776,15 @@ header nav .nav-link
     display: block;
     padding: 16px 32px;
     border-radius: 100px;
-    border: 1px solid var(--lightBorder);
+    border: 0.052vw solid var(--lightBorder);
     font-weight: 400;
     color: var(--black-20);
     text-transform: uppercase;
+    position: relative;
+    transition: 0.5s ease-in-out;
 }
+
+
 
 /*=====  End of About section  ======*/
 
@@ -732,8 +804,10 @@ header nav .nav-link
 
 .showcase-heading
 {
-    margin-bottom: 20px;
-    width: fit-content;
+    /* margin-bottom: 20px; */
+    margin-bottom: 1.042vw;
+    /* width: fit-content; */
+    width: 100%;
 
 }
 
@@ -780,14 +854,17 @@ header nav .nav-link
 
 .showcase-slider .slide-group .showcase-slide .showcase-img
 {
+    display: block;
     /* height: min(55.39vh, 25.875vw); */
 }
+
 
 .showcase-slider .slide-group .showcase-slide .showcase-img img
 {
     width: 100%;
     /* max-height: 516px; */
     /* height: 100%; */
+    max-width: 37.5vw;
     object-fit: cover;
     aspect-ratio: 16/9;
     transform: scale(1.5);
@@ -796,10 +873,15 @@ header nav .nav-link
 
 
 
+
 .showcase-nav-wrapper
 {
-    margin-top: 16px;
+    /* margin-top: 80px; */
     padding-left: clamp(40px, 80px, 4.167vw);
+    position: absolute;
+    left: 0;
+    bottom: 9%;
+    width: 100%;
 }
 
 .showcase-nav
@@ -818,7 +900,7 @@ header nav .nav-link
 .showcase-nav .showcase-nav-link
 {
     display: inline-block;
-    padding: 8px;
+    padding: 8px 12px;
     border-radius: 60px;
     font-weight: 400;
     color: var(--white);
@@ -874,15 +956,16 @@ header nav .nav-link
 /*=============================================
 =            Contact section            =
 =============================================*/
-.contact-section .nav-link
+/* .contact-section .nav-link
 {
     color: var(--white);
-}
+
+} */
 
 .contact-main
 {
     position: relative;
-    height: 100dvh;
+    height: 100svh;
 }
 
 .contact-content-left
@@ -906,7 +989,8 @@ header nav .nav-link
     color: var(--black-20);
 }
 
-.contact-msg a
+.contact-msg a,
+.contact-msg p
 {
     display: block;
     width: fit-content;
@@ -931,7 +1015,7 @@ header nav .nav-link
     right: unset;
 }
 
-.contact-msg a:first-child
+.contact-msg p
 {
     margin-bottom: 5px;
     color: var(--primary-dark);
@@ -963,7 +1047,8 @@ header nav .nav-link
     position: absolute;
     right: 0;
     top: 0;
-    width: min(660px, 40vw);
+    /* width: min(660px, 40vw); */
+    width: 34.375vw;
     height: 100%;
     object-fit: cover;
     object-position: top;
@@ -982,8 +1067,10 @@ header nav .nav-link
 {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
-    max-width: 500px;
+    /* gap: 16px; */
+    gap: 0.833vw;
+    /* max-width: 500px; */
+    max-width: 26.042vw;
 
 }
 
@@ -998,8 +1085,8 @@ header nav .nav-link
 .connect-links a svg
 {
     margin-left: 8px;
-    width: 24px;
-    height: 24px;
+    width: 1.25vw;
+    height: 1.25vw;
     transition-duration: 500ms;
 }
 
@@ -1160,6 +1247,11 @@ header nav .nav-link
         display: none;
     }
 
+    .site-logo
+    {
+        font-size: clamp(28px, 32px, 1.667vw);
+    }
+
     .mobile-header .menu-toggler
     {
         all: unset;
@@ -1181,10 +1273,10 @@ header nav .nav-link
         color: var(--primary-dark);
     }
 
-    .mobile-header .menu-toggler .open
+    /* .mobile-header .menu-toggler .open
     {
         display: none;
-    }
+    } */
 
     .mobile-header nav
     {
@@ -1234,15 +1326,16 @@ header nav .nav-link
         display: inline-flex;
         transform-origin: bottom;
         transform: scaleY(0);
-        transition: transform 0s;
         transition: transform .75s cubic-bezier(.215, .61, .355, 1) calc(var(--index)*0.075s + var(--delay)*1s);
+
     }
 
-    /* .mobile-header .menu-toggler.active~nav .nav-link-wrapper a .letter
+    .mobile-header .menu-toggler.active~nav .nav-link-wrapper a.char .letter
     {
 
         transform: scaleY(1);
-    } */
+
+    }
 
     /*=====  End of header  ======*/
 
@@ -1255,7 +1348,7 @@ header nav .nav-link
 
     .intro-main
     {
-        min-height: 50dvh;
+        min-height: 50svh;
         display: block;
     }
 
@@ -1307,13 +1400,26 @@ header nav .nav-link
         margin-top: 20px;
     }
 
-    .intro-content .intro-heading::after
+    .intro-content .heading-1
     {
+        position: relative;
+    }
+
+    .intro-content .heading-1::after
+    {
+        content: '';
         height: 10px;
         width: 40%;
         max-width: unset;
-        left: -90%;
+        left: 0%;
         bottom: -10px;
+        position: absolute;
+        background: var(--primary-dark);
+    }
+
+    .intro-content .intro-heading::after
+    {
+        display: none;
     }
 
     /*=====  End of Intro main  ======*/
@@ -1341,6 +1447,11 @@ header nav .nav-link
     {
         padding-top: clamp(30px, 60px, 3.125vw);
         padding-inline: clamp(30px, 60px, 3.125vw);
+    }
+
+    .about-content-header p
+    {
+        max-width: 700px;
     }
 
     .skills-group
@@ -1372,6 +1483,11 @@ header nav .nav-link
         /* overflow: visible; */
         display: block;
         height: fit-content;
+    }
+
+    .showcase-section .bg-blob
+    {
+        display: none;
     }
 
     .showcase-main
@@ -1406,7 +1522,19 @@ header nav .nav-link
         gap: 20px;
         flex-shrink: 0;
         position: relative;
-        width: max-content;
+        width: 100%;
+        transition: all 0.4s ease-out;
+        padding-left: 0px;
+        padding-top: 25px;
+        overflow-x: scroll;
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+    }
+
+    .showcase-slider .slide-group::-webkit-scrollbar
+    {
+        display: none;
     }
 
     .showcase-slider .slide-group>.showcase-slide
@@ -1415,6 +1543,15 @@ header nav .nav-link
         position: relative;
         flex-shrink: 0;
         max-width: 300px;
+    }
+
+    .showcase-slider .slide-group .slide-group-title
+    {
+        transform: rotate(0deg);
+        bottom: unset;
+        z-index: 2;
+        left: 10px;
+        top: 0;
     }
 
     .showcase-slider .slide-group .showcase-slide .showcase-img img
@@ -1438,7 +1575,7 @@ header nav .nav-link
     =============================================*/
     .contact-section
     {
-        min-height: 70dvh;
+        min-height: 70svh;
     }
 
     .contact-main
@@ -1466,8 +1603,15 @@ header nav .nav-link
     .connect-links
     {
         margin-top: min(7.01vh, 3.54vw);
+        max-width: 500px;
+        gap: 16px;
     }
 
+    .connect-links a svg
+    {
+        width: 20px;
+        height: 20px;
+    }
 
     /*=====  End of Contact  ======*/
 
@@ -1487,9 +1631,6 @@ header nav .nav-link
 {
 
 
-
-
-
     /*=============================================
     =            Contact            =
     =============================================*/
@@ -1501,6 +1642,194 @@ header nav .nav-link
 
 
     /*=====  End of Contact  ======*/
+
+
+}
+
+
+@media(max-width: 576px)
+{
+
+
+
+    /*=============================================
+    =            Typography            =
+    =============================================*/
+    .subtitle
+    {
+        font-size: max(14px, 1.5vw);
+    }
+
+    .p-xl
+    {
+        font-size: clamp(14px, 28px, 1.458vw);
+    }
+
+    .p-xxl
+    {
+        font-size: clamp(14px, 3.505vh, 1.770vw);
+    }
+
+    /*=====  End of Typography  ======*/
+
+
+
+
+
+    /*=============================================
+    =            intro            =
+    =============================================*/
+
+    .intro-content .intro-subheading p br
+    {
+        display: none;
+    }
+
+    .intro-content .intro-desc
+    {
+        max-width: 100%;
+    }
+
+    .intro-content .intro-desc p
+    {
+        max-width: 80%;
+    }
+
+    .intro-main .intro-img
+    {
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 50%;
+        background: var(--primary-dark);
+        left: 0;
+    }
+
+    .intro-content .heading-1::after
+    {
+        height: 5px;
+        bottom: -5px;
+    }
+
+    .intro-content h1.heading-1
+    {
+        margin-right: 10px;
+    }
+
+
+
+    .spinner
+    {
+        width: 60px;
+        height: 60px;
+    }
+
+    .spinner svg
+    {
+        width: 60px;
+        height: 60px;
+    }
+
+    .intro-content .intro-subheading
+    {
+        margin-top: 10px;
+    }
+
+
+
+    /*=====  End of intro  ======*/
+
+
+
+    /*=============================================
+    =            about            =
+    =============================================*/
+
+    .about-content-header
+    {
+        margin-bottom: 26px;
+    }
+
+    .skills-group
+    {
+        gap: 10px;
+        max-width: 100%;
+    }
+
+    .skills-group .single-skill
+    {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+
+    /*=====  End of about  ======*/
+
+
+
+
+    /*=============================================
+    =            showcase            =
+    =============================================*/
+    .showcase-main
+    {
+        padding-top: clamp(30px, 60px, 3.125vw);
+        padding-inline: clamp(30px, 60px, 3.125vw);
+    }
+
+    .showcase-slider .slide-group>.showcase-slide
+    {
+        max-width: 200px;
+    }
+
+    .showcase-slider .slide-group .slide-group-title .subtitle
+    {
+        font-size: initial;
+    }
+
+    .showcase-slider .slide-group
+    {
+        gap: 10px;
+    }
+
+    /*=====  End of showcase  ======*/
+
+
+
+    /*=============================================
+    =            contact            =
+    =============================================*/
+    .contact-main
+    {
+        padding-top: clamp(30px, 60px, 3.125vw);
+        padding-inline: clamp(30px, 60px, 3.125vw);
+    }
+
+    .connect-links
+    {
+        max-width: 100%;
+    }
+
+    .contact-img
+    {
+        right: unset;
+        bottom: unset;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        min-height: 500px;
+    }
+
+    .contact-img img
+    {
+        object-position: top;
+    }
+
+    /*=====  End of contact  ======*/
+
+
+
+
 
 
 }
