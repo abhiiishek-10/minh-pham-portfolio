@@ -20,7 +20,49 @@ function initiateLenis() {
     }
 }
 
+// ==============loader start================
 
+const loaderTl = gsap.timeline({
+});
+document.onreadystatechange = function () {
+    if (document.readyState !== "complete") {
+        loaderTl.to('.circle', {
+            scale: 1,
+            duration: 1.5,
+            ease: "power2.inOut",
+            stagger: 0.3
+        })
+            .to('.loading-text', {
+                y: '-50%',
+                opacity: 1,
+                duration: 0.7,
+                ease: "power3.out",
+            })
+    } else {
+        loaderTl.to('.loading-text', {
+            y: '100%',
+            opacity: 0,
+            ease: "power4.in",
+        }, ">0.5")
+            .to('.circle', {
+                scale: 0,
+                duration: 1,
+                ease: "power4.inOut",
+                stagger: -0.2
+            }).to('.loader', {
+                opacity: 0,
+                onComplete: () => {
+                    $('.loader').remove();
+                }
+            })
+    }
+};
+
+
+
+
+
+// ==============loader end================
 
 function chopHeadingsToLetters(element) {
     // const headings = document.querySelectorAll('.heading-1');
@@ -179,12 +221,50 @@ if (window.innerWidth <= 991) {
 }
 else {
     window.onload = function () {
-        gsap.to('.loader', {
-            height: 0,
-            duration: 1,
-            ease: 'power4.inOut',
-            onComplete: (self) => { $('.loader').remove() }
-        })
+        // gsap.to('.loader', {
+        //     height: 0,
+        //     duration: 1,
+        //     ease: 'power4.inOut',
+        //     onComplete: (self) => {
+        //         $('.loader').remove()
+        //         gsap.to('window', {
+        //             scrollTo: 0,
+        //             duration: 0.1
+        //         })
+        //     }
+        // })
+
+
+        // loaderTl.to('.contact-loader, .works-loader', {
+        //     width: window.innerWidth / 2 + 'px',
+        //     duration: 1,
+        //     ease: "power4.inOut"
+        // }).to('.loading-section', {
+        //     width: window.innerWidth / 3 + 'px',
+        //     duration: 1,
+        //     ease: "power4.inOut",
+        //     onComplete: () => {
+        //         $('.loading-text').fadeOut()
+        //     }
+        // }, ">1").to('.contact-loader', {
+        //     width: '100px',
+        //     duration: 1,
+        //     ease: "power4.inOut"
+        // }).to('.works-loader', {
+        //     width: '100px',
+        //     duration: 1,
+        //     ease: "power4.inOut"
+        // }, ">-1").to('.about-loader', {
+        //     width: '100px',
+        //     duration: 1,
+        //     ease: "power4.inOut"
+        // }, ">-1").to('.loading-section', {
+        //     backgroundColor: '#ffffff',
+        //     outline: '1px solid var(--lightBorder)',
+        //     duration: 1,
+        //     ease: "power4.inOut"
+        // })
+
         console.log("================== no-touch ================== ");
 
         function fitFirstLastSections() {
@@ -557,6 +637,8 @@ else {
         })
         // ======== Accent Colors changing effect end ========
 
+
+        // ======== Cursor movement update start ========
         window.onmousemove = (e) => {
             gsap.to(':root', {
                 '--x': e.clientX,
@@ -565,16 +647,48 @@ else {
 
             })
         }
+        // ======== Cursor movement update end ========
+
+
+
+        // ======== Section header nav links click handler start ========
+
+        document.querySelectorAll(".section .nav-link").forEach((link) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector(`.band[data-section="${link.getAttribute('href')}"]`).click();
+
+            })
+        })
+
+        // scroll indicator click handler
+        document.querySelectorAll('.scroll-indicator a').forEach((link) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector(`.band[data-section="${e.target.getAttribute('href')}"`).click();
+            })
+        })
+
+
+
+
+
+
+
+        // ======== Section header nav links click handler end ========
+
+        $(window).bind('resize', function (e) {
+            if (window.RT) clearTimeout(window.RT);
+            window.RT = setTimeout(function () {
+                this.location.reload(true); /* false to get page from cache */
+            }, 100);
+        });
+
 
     }
 }
 
 
-// $(window).bind('resize', function (e) {
-//     if (window.RT) clearTimeout(window.RT);
-//     window.RT = setTimeout(function () {
-//         this.location.reload(); /* false to get page from cache */
-//     }, 100);
-// });
+
 
 
