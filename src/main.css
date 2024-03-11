@@ -1,7 +1,3 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
-
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 
@@ -105,6 +101,9 @@
     --aboutBlue: #2B6984;
     --showcaseGreen: #ABBA58;
     --contactRoman: #d66b58;
+
+    --clipX: 50%;
+    --clipY: 50%;
 }
 
 
@@ -789,8 +788,39 @@ header nav .nav-link
     text-transform: uppercase;
     position: relative;
     overflow: hidden;
-    transition: all 0.5s ease-in-out;
+    --clipX: 50%;
+    --clipY: 50%;
+    /* transition: all 0.5s ease-in-out; */
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
 }
+
+.skills-group .single-skill:hover
+{
+    --clipX: 0%;
+    --clipY: 0%;
+}
+
+.skills-group .single-skill::before
+{
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border: 2px solid var(--primary-dark);
+    border-radius: 100px;
+    -webkit-clip-path: inset(0 var(--clipX) 0 var(--clipY));
+    clip-path: inset(0 var(--clipX) 0 var(--clipY));
+    transition: -webkit-clip-path .4s;
+    transition: clip-path .4s;
+    transition: clip-path .4s, -webkit-clip-path .4s;
+}
+
+
 
 .skills-group .single-skill span
 {
@@ -800,10 +830,6 @@ header nav .nav-link
 }
 
 
-.skills-group .single-skill:hover
-{
-    border-color: var(--primary-dark);
-}
 
 
 

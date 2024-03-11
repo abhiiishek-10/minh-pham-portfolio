@@ -11,11 +11,11 @@ function initiateLenis() {
     gsap.ticker.lagSmoothing(0)
 
     stopLenis = function stopLenis() {
-        console.log('lenis stopped');
+        // console.log('lenis stopped');
         lenis.stop()
     }
     resumeLenis = function resumeLenis() {
-        console.log('lenis resumed');
+        // console.log('lenis resumed');
         lenis.start()
     }
 }
