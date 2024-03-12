@@ -276,6 +276,7 @@ else {
                 x: () => -1 * window.innerWidth,
                 xPercent: totalBands.length * band.offsetWidth,
                 ease: "none",
+
                 scrollTrigger: {
                     trigger: `#sec-${index}`,
                     containerAnimation: scrollTween,
@@ -286,6 +287,7 @@ else {
                     scrub: true,
                     id: index + 1,
                     invalidateOnRefresh: true,
+
                     // markers: true,
                 },
 
@@ -374,29 +376,30 @@ else {
 
         // ======== Showcase images reveal animation start ========
 
+
         showcaseImages.forEach((image, index) => {
             gsap.from(image, {
                 clipPath: 'inset(22% 20% 22% 20%)',
                 duration: 1, ease: 'power4.inOut',
                 scrollTrigger: {
                     trigger: image.parentElement,
-                    // start: `left right-=100px`,
-                    start: `left right-=${((totalBands.length + 1) - image.offsetParent.offsetParent.dataset.section.replace('band-', '')) * bandWidth}px`,
-
+                    start: `left right-=100px`,
                     containerAnimation: scrollTween,
                     toggleActions: 'play none none reverse',
                     // markers: true,
                     onEnter: () => {
-                        gsap.to(image.querySelector('img'), {
+                        let enterTween = gsap.to(image.querySelector('img'), {
                             scale: 1,
                             duration: 1,
                             ease: 'power4.inOut',
+                            onComplete: () => { enterTween.kill() }
                         })
                     }, onLeaveBack: () => {
-                        gsap.to(image.querySelector('img'), {
+                        let leaveTween = gsap.to(image.querySelector('img'), {
                             scale: 1.5,
                             duration: 1,
                             ease: 'power4.inOut',
+                            onComplete: () => { leaveTween.kill() }
                         })
                     }
                 }

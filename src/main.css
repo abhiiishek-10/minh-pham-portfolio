@@ -877,6 +877,7 @@ header nav .nav-link
     padding-left: 60px;
     gap: min(3.49vh, 1.66vh);
     position: relative;
+    will-change: transform;
 }
 
 .showcase-slider .slide-group .slide-group-title
@@ -898,12 +899,19 @@ header nav .nav-link
 .showcase-slider .slide-group .showcase-slide
 {
     background: var(--primary-dark);
+    will-change: transform;
+    max-width: 37.5vw;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+    overflow: hidden;
 }
 
 .showcase-slider .slide-group .showcase-slide .showcase-img
 {
     display: block;
     /* height: min(55.39vh, 25.875vw); */
+   
+    will-change: transform;
 }
 
 
@@ -912,9 +920,7 @@ header nav .nav-link
     width: 100%;
     /* max-height: 516px; */
     /* height: 100%; */
-    max-width: 37.5vw;
     object-fit: cover;
-    aspect-ratio: 16/9;
     transform: scale(1.5);
     will-change: transform;
 }
