@@ -910,7 +910,7 @@ header nav .nav-link
 {
     display: block;
     /* height: min(55.39vh, 25.875vw); */
-   
+
     will-change: transform;
 }
 
@@ -1732,6 +1732,7 @@ header nav .nav-link
         position: relative;
         flex-shrink: 0;
         max-width: 300px;
+        aspect-ratio: unset;
     }
 
     .showcase-slider .slide-group .slide-group-title
@@ -1745,7 +1746,8 @@ header nav .nav-link
 
     .showcase-slider .slide-group .showcase-slide .showcase-img img
     {
-        aspect-ratio: 1;
+        width: 100%;
+        object-fit: cover;
     }
 
     #showcase-nav
