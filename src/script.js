@@ -11,19 +11,19 @@ function initiateLenis() {
     gsap.ticker.lagSmoothing(0)
 
     stopLenis = function stopLenis() {
-        // console.log('lenis stopped');
+
         lenis.stop()
     }
     resumeLenis = function resumeLenis() {
-        // console.log('lenis resumed');
+
         lenis.start()
     }
 }
 
 // ==============loader start================
 
-const loaderTl = gsap.timeline({
-});
+// Loader Timeline
+const loaderTl = gsap.timeline({});
 document.onreadystatechange = function () {
     if (document.readyState !== "complete") {
         loaderTl.to('.circle', {
@@ -61,33 +61,29 @@ document.onreadystatechange = function () {
 
 
 
-
 // ==============loader end================
 
+// Function to chop headings to letters
 function chopHeadingsToLetters(element) {
-    // const headings = document.querySelectorAll('.heading-1');
-    const headings = element;
-    headings.forEach(heading => {
-        const text = heading.textContent.trim(); // Trim leading and trailing whitespace
-        let isSpace = false; // Flag to track unnecessary spaces
-        heading.innerHTML = text
-            .split('')
-            .map((letter, index) => {
-                if (letter !== ' ') { // Skip empty spaces
-                    const letterElement = document.createElement('div');
-                    letterElement.classList.add('letter');
-                    letterElement.style.setProperty('--delay', 0.2);
-                    letterElement.style.setProperty('--index', index);
-                    letterElement.textContent = letter;
-                    isSpace = false; // Reset the flag when a non-space character is encountered
-                    return letterElement.outerHTML;
-                } else if (!isSpace) { // Add space only if it's not an unnecessary space
-                    isSpace = true; // Set the flag to true for unnecessary spaces
-                    return ' ';
-                }
-                return '';
-            })
-            .join('');
+    element.forEach(heading => {
+        const text = heading.textContent.trim();
+        let isSpace = false;
+
+        heading.innerHTML = text.split('').map((letter, index) => {
+            if (letter !== ' ') {
+                const letterElement = document.createElement('div');
+                letterElement.classList.add('letter');
+                letterElement.style.setProperty('--delay', 0.2);
+                letterElement.style.setProperty('--index', index);
+                letterElement.textContent = letter;
+                isSpace = false;
+                return letterElement.outerHTML;
+            } else if (!isSpace) {
+                isSpace = true;
+                return ' ';
+            }
+            return '';
+        }).join('');
     });
 }
 
@@ -96,23 +92,25 @@ if (window.innerWidth <= 991) {
     ScrollTrigger.config({
         ignoreMobileResize: true
     });
-    console.log(" ================== is-touch ================== ");
+    //console.log(" ================== is-touch ================== ");
 
-    window.onload = function () {
+    window.addEventListener('load', function () {
         initiateLenis();
-
-        let mobileTl = gsap.timeline();
-        mobileTl.to('.loader', {
-            height: 0,
-            duration: 1,
-            ease: 'power4.inOut',
-            onComplete: (self) => { $('.loader').remove() }
-        })
-
-
+        const navLinks = document.querySelectorAll("#nav-container .nav-link");
         const mobileHeader = document.querySelector('.mobile-header');
         const mainWrapper = document.querySelector('#sliderWrapper');
-        mainWrapper.style.paddingTop = Math.floor(mobileHeader.offsetHeight) + 'px';
+        const allHeadings = document.querySelectorAll('.heading-1');
+        const navBtn = document.getElementById('menu-toggle-btn');
+
+        let mobileTl = gsap.timeline();
+        // mobileTl.to('.loader', {
+        //     height: 0,
+        //     duration: 1,
+        //     ease: 'power4.inOut',
+        //     onComplete: () => { $('.loader').remove() }
+        // })
+
+        mainWrapper.style.paddingTop = `${Math.floor(mobileHeader.offsetHeight)}px`;
 
         mobileTl.from('.intro-img img', {
             clipPath: 'inset(50%)',
@@ -120,18 +118,8 @@ if (window.innerWidth <= 991) {
             ease: 'power4.inOut',
         })
 
-
-        // let innerSliders = document.querySelectorAll('.slide-group')
-        // innerSliders.forEach((slider) => {
-        //     Draggable.create(slider, {
-        //         type: "x",
-        //         bounds: $('#showcase-panels'),
-        //         edgeResistance: 0.8,
-        //     })
-        // })
-
-        chopHeadingsToLetters(document.querySelectorAll('.heading-1'));
-        gsap.utils.toArray('.heading-1').forEach(el => {
+        chopHeadingsToLetters(allHeadings);
+        allHeadings.forEach(el => {
             gsap.to(el, {
 
                 scrollTrigger: {
@@ -152,7 +140,6 @@ if (window.innerWidth <= 991) {
         })
 
         function scaleLetter() {
-            const navLinks = document.querySelectorAll("#nav-container .nav-link");
             navLinks.forEach(navLink => {
                 navLink.classList.toggle('char');
             });
@@ -169,8 +156,8 @@ if (window.innerWidth <= 991) {
 
         const openNav = () => {
             animateOpenNav();
-            chopHeadingsToLetters(document.querySelectorAll("#nav-container .nav-link-wrapper .nav-link"));
-            const navBtn = document.getElementById('menu-toggle-btn');
+            chopHeadingsToLetters(navLinks);
+
             navBtn.onclick = function (e) {
                 navBtn.classList.toggle('active');
                 if (navBtn.classList.contains('active')) {
@@ -191,13 +178,11 @@ if (window.innerWidth <= 991) {
         openNav();
 
         function navLinkClick() {
-            const navBtn = document.getElementById('menu-toggle-btn');
-            document.querySelectorAll("#nav-container .nav-link").forEach((link) => {
+
+            navLinks.forEach((link) => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const target = link;
-                    const targetSection = target.getAttribute('href');
-                    // const targetOffset = document.querySelector(targetSection).offsetTop;
+                    const targetSection = link.getAttribute('href');
                     gsap.to(window, {
                         duration: 0.2,
                         scrollTo: {
@@ -213,85 +198,56 @@ if (window.innerWidth <= 991) {
         }
         navLinkClick();
 
-    }
+    })
+
 
 
 
 
 }
 else {
-    window.onload = function () {
-        // gsap.to('.loader', {
-        //     height: 0,
-        //     duration: 1,
-        //     ease: 'power4.inOut',
-        //     onComplete: (self) => {
-        //         $('.loader').remove()
-        //         gsap.to('window', {
-        //             scrollTo: 0,
-        //             duration: 0.1
-        //         })
-        //     }
-        // })
+    window.addEventListener('load', () => {
 
 
-        // loaderTl.to('.contact-loader, .works-loader', {
-        //     width: window.innerWidth / 2 + 'px',
-        //     duration: 1,
-        //     ease: "power4.inOut"
-        // }).to('.loading-section', {
-        //     width: window.innerWidth / 3 + 'px',
-        //     duration: 1,
-        //     ease: "power4.inOut",
-        //     onComplete: () => {
-        //         $('.loading-text').fadeOut()
-        //     }
-        // }, ">1").to('.contact-loader', {
-        //     width: '100px',
-        //     duration: 1,
-        //     ease: "power4.inOut"
-        // }).to('.works-loader', {
-        //     width: '100px',
-        //     duration: 1,
-        //     ease: "power4.inOut"
-        // }, ">-1").to('.about-loader', {
-        //     width: '100px',
-        //     duration: 1,
-        //     ease: "power4.inOut"
-        // }, ">-1").to('.loading-section', {
-        //     backgroundColor: '#ffffff',
-        //     outline: '1px solid var(--lightBorder)',
-        //     duration: 1,
-        //     ease: "power4.inOut"
-        // })
 
-        console.log("================== no-touch ================== ");
+        //console.log("================== no-touch ================== ");
+        const allHeadings = document.querySelectorAll('.heading-1');
+        const bands = document.querySelector('.bands')
+        const totalBands = document.querySelectorAll('.band');
+        const slider = document.querySelector("#panels");
+        const sliderWrapper = document.querySelector("#sliderWrapper");
+        const sections = gsap.utils.toArray(".section");
+
+        const headerWrapper = document.querySelectorAll('.header-wrapper');
+        const bandWidth = document.querySelector('.band').offsetWidth;
+        const showcaseImages = document.querySelectorAll('.showcase-img');
+
+
 
         function fitFirstLastSections() {
-            //NOTE: controlling landing section's width to extactly match the available space on the screen excluding the space that bands are taking up.
+            //NOTE: controlling landing section's width to exactly match the available space on the screen excluding the space that bands are taking up.
             const landingSection = document.querySelector(".intro-section");
-            landingSection.style.width = (window.innerWidth - document.querySelector('.bands').offsetWidth) + 'px';
+            landingSection.style.width = (window.innerWidth - bands.offsetWidth) + 'px';
             landingSection.querySelector('.intro-main').style.height = (window.innerHeight - landingSection.querySelector('header').offsetHeight) + 'px';
 
 
             const contactSection = document.querySelector(".contact-section");
-            contactSection.style.width = (window.innerWidth - document.querySelector('.bands').offsetWidth) + 'px';
+            contactSection.style.width = (window.innerWidth - bands.offsetWidth) + 'px';
         }
         fitFirstLastSections();
 
 
-        const slider = document.querySelector("#panels");
-        const sliderWrapper = document.querySelector("#sliderWrapper");
 
-        const sections = gsap.utils.toArray(".section");
+
         sections.forEach((section) => {
-            $(section).css('min-width', (window.innerWidth - $('.bands').width()) + 'px');
+            section.style.minWidth = (window.innerWidth - bands.offsetWidth) + 'px'
         });
 
 
         function distance() {
             return sliderWrapper.scrollWidth - window.innerWidth
         }
+
         window.addEventListener("resize", () => {
             fitFirstLastSections();
             distance();
@@ -314,7 +270,7 @@ else {
 
 
         // ============ Bands translation start ============
-        const totalBands = document.querySelectorAll('.band');
+
         totalBands.forEach((band, index) => {
             gsap.to(band, {
                 x: () => -1 * window.innerWidth,
@@ -357,30 +313,11 @@ else {
 
 
         // ============ Sticky header start ============
-        // setTimeout(() => {
-        //     $('#sec-1 .header').parent().css('width', window.innerWidth - 300 + 'px')
-        //     const sec1 = document.querySelector('#sec-1').offsetWidth;
-        //     console.log(sec1);
-        //     gsap.to('#sec-1 .header', {
-        //         translateX: `${(sec1 - $('#sec-1 .header').width()) - 160}px`,
-        //         ease: 'none',
-        //         scrollTrigger: {
-        //             trigger: '#sec-1 .header',
-        //             containerAnimation: scrollTween,
-        //             start: 'left left+=100',
-        //             endTrigger: '#sec-1',
-        //             end: 'right right-=200',
-        //             scrub: true,
-        //             markers: true
-        //         }
-        //     })
-
-        // }, 100);
 
 
-        const headerWrapper = document.querySelectorAll('.header-wrapper');
-        const bandWidth = document.querySelector('.band').offsetWidth;
-        // setTimeout(() => {
+
+
+
         headerWrapper.forEach((headerWrapper, index) => {
             let header = headerWrapper.querySelector('.header');
             headerWrapper.style.width = window.innerWidth - (totalBands.length * bandWidth) + 'px';
@@ -400,7 +337,7 @@ else {
                 }
             })
         })
-        // }, 100);
+
         // ============ Sticky header end ============
 
 
@@ -416,13 +353,13 @@ else {
 
 
         // Add click event on anchor tags with class "band"
-        const bandLinks = document.querySelectorAll('a.band');
-        bandLinks.forEach((link, index) => {
+
+        totalBands.forEach((link, index) => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 // Calculate the left position based on cumulative widths
                 const leftPosition = index >= 0 ? cumulativeWidths[index] : 0;
-                console.log(`Left position of section ${link.id}: ${leftPosition}px`);
+                //console.log(`Left position of section ${link.id}: ${leftPosition}px`);
                 gsap.to(window, {
                     duration: 1,
                     scrollTo: {
@@ -436,7 +373,7 @@ else {
 
 
         // ======== Showcase images reveal animation start ========
-        const showcaseImages = document.querySelectorAll('.showcase-img');
+
         showcaseImages.forEach((image, index) => {
             gsap.from(image, {
                 clipPath: 'inset(22% 20% 22% 20%)',
@@ -470,34 +407,29 @@ else {
 
         // ======== Showcase sticky Heading & Sticky Navbar animation start ========
         function showcaseNavbarAnimation() {
-            // setTimeout(() => {
+
             const showcaseNav = document.querySelector('#showcase-nav');
             const showcaseHeader = showcaseNav.offsetParent.querySelector('.header');
-            gsap.to(showcaseNav.firstElementChild, {
-                translateX: `${showcaseNav.offsetParent.offsetWidth - (showcaseHeader.offsetWidth)}px`,
-                ease: 'none',
-                scrollTrigger: {
-                    containerAnimation: scrollTween,
-                    trigger: showcaseNav,
-                    start: `left left+=${showcaseNav.offsetParent.id.replace('sec-', '') * bandWidth}`,
-                    end: `right right-=${(totalBands.length - showcaseNav.offsetParent.id.replace('sec-', '')) * bandWidth}`,
-                    scrub: true,
-                    // markers: true,
-                }
-            })
-            gsap.to('.showcase-heading .heading-1', {
-                translateX: `${showcaseNav.offsetParent.offsetWidth - (showcaseHeader.offsetWidth)}px`,
-                ease: 'none',
-                scrollTrigger: {
-                    containerAnimation: scrollTween,
-                    trigger: showcaseNav,
-                    start: `left left+=${showcaseNav.offsetParent.id.replace('sec-', '') * bandWidth}`,
-                    end: `right right-=${(totalBands.length - showcaseNav.offsetParent.id.replace('sec-', '')) * bandWidth}`,
-                    scrub: true,
-                    // markers: true,
+            function animateElement(target) {
+                const translateXValue = `${showcaseNav.offsetParent.offsetWidth - (showcaseHeader.offsetWidth)}px`;
+                const startValue = `left left+=${showcaseNav.offsetParent.id.replace('sec-', '') * bandWidth}`;
+                const endValue = `right right-=${(totalBands.length - showcaseNav.offsetParent.id.replace('sec-', '')) * bandWidth}`;
 
-                }
-            })
+                gsap.to(target, {
+                    translateX: translateXValue,
+                    ease: 'none',
+                    scrollTrigger: {
+                        containerAnimation: scrollTween,
+                        trigger: showcaseNav,
+                        start: startValue,
+                        end: endValue,
+                        scrub: true,
+                    }
+                });
+            }
+
+            animateElement(showcaseNav.firstElementChild);
+            animateElement('.showcase-heading .heading-1');
 
 
 
@@ -533,29 +465,6 @@ else {
 
                 })
             })
-
-
-            // showcaseNavLinks.forEach((link, i) => {
-            //     console.log();
-            //     link.addEventListener("click", e => {
-            //         e.preventDefault();
-            //         console.log(cumulativeShowcasePanelWidths[i]);
-            //         const leftPosition = i >= 0 ? cumulativeShowcasePanelWidths[i] : 0;
-
-            //         gsap.to(window, {
-            //             duration: 1,
-            //             scrollTo: {
-            //                 y: showcasePanels[i].getBoundingClientRect().left,
-            //                 // offsetY: 
-            //             }
-            //         });
-            //     });
-            // });
-
-
-
-
-            // }, 100);
         }
         showcaseNavbarAnimation();
         // ======== Showcase sticky Heading & Sticky Navbar animation end ========
@@ -563,8 +472,8 @@ else {
 
 
         // ======== Headings animation start ========
-        chopHeadingsToLetters(document.querySelectorAll('.heading-1'));
-        gsap.utils.toArray('.heading-1').forEach(el => {
+        chopHeadingsToLetters(allHeadings);
+        allHeadings.forEach(el => {
             gsap.to(el, {
 
                 scrollTrigger: {
@@ -581,7 +490,7 @@ else {
                     },
                     onLeave: () => {
                         el.classList.remove('char');
-                        if (el.id == 'sticky-showcase-title') {
+                        if (el.id === 'sticky-showcase-title') {
                             el.classList.add('char');
                         }
                     },
@@ -605,9 +514,9 @@ else {
             { 'primary': '#69b088', 'secondary': '#69b088' },
             { 'primary': '#d66b58', 'secondary': '#d66b58' },
         ]
-        sections.forEach((section, index) => {
-            $(section).on('mouseover', () => {
 
+        sections.forEach((section, index) => {
+            section.addEventListener('mouseover', () => {
                 gsap.to('.band', {
                     '--black-20': sectionColors[index].primary,
                     '--lightBorder': sectionColors[index].secondary,
@@ -634,6 +543,7 @@ else {
                     })
                 }
             })
+
         })
         // ======== Accent Colors changing effect end ========
 
@@ -685,7 +595,9 @@ else {
         });
 
 
-    }
+
+    })
+
 }
 
 

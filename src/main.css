@@ -1530,8 +1530,9 @@ header nav .nav-link
 
     .intro-main
     {
-        min-height: 50svh;
+        min-height: calc(100svh - 91px);
         display: block;
+        height: unset;
     }
 
     .intro-main .intro-img
