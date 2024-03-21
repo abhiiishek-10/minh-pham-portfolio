@@ -146,7 +146,7 @@ function chopHeadingsToLetters(element) {
   });
 }
 
-if (window.innerWidth <= 991) {
+if (screen.availWidth <= 991) {
   ScrollTrigger.config({
     ignoreMobileResize: true,
   });
@@ -161,13 +161,6 @@ if (window.innerWidth <= 991) {
     const navBtn = document.getElementById("menu-toggle-btn");
 
     let mobileTl = gsap.timeline();
-    // mobileTl.to('.loader', {
-    //     height: 0,
-    //     duration: 1,
-    //     ease: 'power4.inOut',
-    //     onComplete: () => { $('.loader').remove() }
-    // })
-
     mainWrapper.style.paddingTop = `${Math.floor(mobileHeader.offsetHeight)}px`;
 
     mobileTl.from(".intro-img img", {
@@ -272,24 +265,24 @@ if (window.innerWidth <= 991) {
     function fitFirstLastSections() {
       //NOTE: controlling landing section's width to exactly match the available space on the screen excluding the space that bands are taking up.
       const landingSection = document.querySelector(".intro-section");
-      landingSection.style.width = window.innerWidth - bands.offsetWidth + "px";
+      landingSection.style.width = screen.availWidth - bands.offsetWidth + "px";
       landingSection.querySelector(".intro-main").style.height =
-        window.innerHeight -
+        screen.availHeight -
         landingSection.querySelector("header").offsetHeight +
         "px";
 
       const contactSection = document.querySelector(".contact-section");
       contactSection.style.minWidth =
-        window.innerWidth - bands.offsetWidth + "px";
+        screen.availWidth - bands.offsetWidth + "px";
     }
     fitFirstLastSections();
 
     sections.forEach((section) => {
-      section.style.minWidth = window.innerWidth - bands.offsetWidth + "px";
+      section.style.minWidth = screen.availWidth - bands.offsetWidth + "px";
     });
 
     function distance() {
-      return sliderWrapper.scrollWidth - window.innerWidth;
+      return sliderWrapper.scrollWidth - screen.availWidth;
     }
 
     window.addEventListener("resize", () => {
@@ -299,7 +292,7 @@ if (window.innerWidth <= 991) {
     });
 
     let scrollTween = gsap.to(sliderWrapper, {
-      x: window.innerWidth,
+      x: screen.availWidth,
       xPercent: -100,
       ease: "none", // <-- IMPORTANT!
       scrollTrigger: {
@@ -316,7 +309,7 @@ if (window.innerWidth <= 991) {
 
     totalBands.forEach((band, index) => {
       gsap.to(band, {
-        x: () => -1 * window.innerWidth,
+        x: () => -1 * screen.availWidth,
         xPercent: totalBands.length * band.offsetWidth,
         ease: "none",
 
@@ -359,7 +352,7 @@ if (window.innerWidth <= 991) {
     headerWrapper.forEach((headerWrapper, index) => {
       let header = headerWrapper.querySelector(".header");
       headerWrapper.style.width =
-        window.innerWidth - totalBands.length * bandWidth + "px";
+        screen.availWidth - totalBands.length * bandWidth + "px";
       let parentSection = headerWrapper.parentElement;
 
       gsap.to(header, {

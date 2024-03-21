@@ -505,11 +505,12 @@ header nav .nav-link
     height: 80%;
     filter: blur(250px);
     -webkit-filter: blur(250px);
+    transform: translate3d(-50%, 0, 0);
+    -webkit-transform: translate3d(-50%, 0, 0);
     opacity: 0.1;
     background: var(--primary-dark);
     top: 33%;
     left: 50%;
-    transform: translateX(-50%);
     z-index: 0;
     pointer-events: none;
 }
@@ -621,15 +622,17 @@ header nav .nav-link
     object-fit: cover;
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%);
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
     transition-duration: 500ms;
-
 }
 
 .intro-img img:hover
 {
     filter: grayscale(0%);
     -webkit-filter: grayscale(0%);
-    transform: scale(1.05);
+    transform: translate3d(0, 0, 0) scale(1.05);
+    -webkit-transform: translate3d(0, 0, 0) scale(1.05);
 }
 
 .intro-main .intro-content-wrapper
@@ -1565,7 +1568,7 @@ header nav .nav-link
     .mobile-header .menu-toggler
     {
         all: unset;
-        backdrop-filter: blur(10px);
+
         background: var(--black-20);
         border-radius: 100px;
         padding: 6px 12px;
@@ -1681,9 +1684,12 @@ header nav .nav-link
 
     .intro-img img:hover
     {
-        transform: scale(1);
         filter: grayscale(100%);
         -webkit-filter: grayscale(100%);
+        transform: translate3d(0, 0, 0) scale(1);
+        -webkit-transform: translate3d(0, 0, 0) scale(1);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
     }
 
     .intro-main .intro-content-wrapper
